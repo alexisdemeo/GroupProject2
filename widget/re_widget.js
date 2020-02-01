@@ -22,7 +22,7 @@ const btn = document.querySelector("#submit")
 
 async function getFromS3() {
     console.log("Fired")
-    await fetch('https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/index.html', {
+    await fetch('https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/re_widget_f1-test.html', {
     }).then((response) => {
         console.log("Response from S3")
         // const res = response.text()
