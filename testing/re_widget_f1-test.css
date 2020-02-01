@@ -1,0 +1,145 @@
+body {
+    height: 2000px;
+    background-color: grey;
+}
+
+#re-widget {
+    position: fixed;
+    bottom: 2%;
+    right: 4%;
+    font-family: 'Lato', sans-serif;
+}
+
+#re-widget.is-hidden {
+    display: none;
+}
+
+.re-widget-wrapper {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    height: auto;
+    width: 300px;
+    border: none;
+    border-radius: 25px;
+}
+
+
+/* floating left side client logo */
+
+.re-widget-header p,
+.re-widget-body p {
+    text-align: center;
+    margin: 0;
+    padding: 10px;
+    font-size: 12px;
+}
+
+.re-widget-footer p {
+    margin: 0;
+    padding: 6px;
+}
+
+.re-widget-footer p span {
+    font-size: 10px;
+}
+
+.re-widget-header {
+    background-color: #4d9ce0;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    color: #ffffff;
+    /* position: relative; */
+}
+
+.re-widget-body {
+    display: flex;
+    flex-direction: column;
+    flex-basis: auto;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+.re-widget-body p {
+    display: flex;
+    align-self: center;
+}
+
+.re-btn-wrapper-f1 {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px 0 10px 0;
+}
+
+.re-btn-container-f2 {
+    max-width: 300px;
+    margin: 0 auto;
+    /* padding: 10px 0 10px 0; */
+}
+
+.re-btn-wrapper-f2 {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.re-widget-btn-category {
+    height: auto;
+    flex-basis: 40%;
+    width: auto;
+    position: relative;
+    padding: 8px;
+    margin: 5px;
+    border-style: none;
+    background-color: rgba(77, 156, 224, 0.8);
+    color: black;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+button.re-widget-btn-round {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    position: relative;
+    border-style: none;
+    cursor: pointer;
+}
+
+.re-widget-img-like,
+.re-widget-img-dont {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.re-widget-footer {
+    font-size: 8px;
+    text-align: center;
+    border-top: 1px solid rgba(0, 0, 0, .2);
+}
+
+.re-widget-nav-wrapper {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px;
+}
+
+.re-widget-nav-wrapper button {
+    border-radius: 2px;
+    padding: 5px 12px 5px 12px;
+    cursor: pointer;
+}
+
+.re-widget-btn-next {
+    background-color: #4d9ce0;
+    color: white;
+}
+
+.re-widget-btn-back {
+    background-color: white;
+    color: #4d9ce0;
+    border-color: #4d9ce0;
+}

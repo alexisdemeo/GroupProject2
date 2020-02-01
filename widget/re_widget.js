@@ -14,6 +14,7 @@ console.log(popup);
 
 // function myFunction() {
 //     let widget = document.getElementById("re-widget")
+// need to add is hidden class to re-widget
 //     widget.classList.remove('is-hidden');
 // }
 
@@ -38,3 +39,5 @@ async function getFromS3() {
 }
 
 btn.addEventListener("click", getFromS3)
+
+
