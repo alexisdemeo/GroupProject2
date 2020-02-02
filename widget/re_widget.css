@@ -94,14 +94,23 @@ p.re-widget-fb-prompt {
     cursor: pointer;
 }
 
-button.re-widget-btn-round-like,
-button.re-widget-btn-round-dont {
+.re-widget-btn-category:focus {
+    outline: 0;
+}
+
+.re-widget-btn-round-like,
+.re-widget-btn-round-dont {
     border-radius: 50%;
     width: 50px;
     height: 50px;
     position: relative;
     border-style: none;
     cursor: pointer;
+}
+
+.re-widget-btn-round-like:focus,
+.re-widget-btn-round-dont:focus {
+    outline: 0;
 }
 
 .re-widget-img-like,
