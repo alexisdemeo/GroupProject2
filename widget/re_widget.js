@@ -19,6 +19,7 @@ console.log(popup);
 // }
 
 const btn = document.querySelector("#submit")
+const likeBtn = document.querySelector('#')
 
 async function getFromS3() {
     console.log("Fired")
