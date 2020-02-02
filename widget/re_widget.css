@@ -3,6 +3,7 @@
     bottom: 2%;
     right: 4%;
     font-family: 'Lato', sans-serif;
+    z-index: 10000;
 }
 
 #re-widget.is-hidden {
@@ -18,9 +19,6 @@
     border: none;
     border-radius: 25px;
 }
-
-
-/* floating left side client logo */
 
 .re-widget-header p,
 .re-widget-body p {
@@ -45,7 +43,6 @@
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
     color: #ffffff;
-    /* position: relative; */
 }
 
 .re-widget-body {
@@ -70,7 +67,6 @@
 .re-btn-container-f2 {
     max-width: 300px;
     margin: 0 auto;
-    /* padding: 10px 0 10px 0; */
 }
 
 .re-btn-wrapper-f2 {
