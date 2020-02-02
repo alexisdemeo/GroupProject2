@@ -9,9 +9,6 @@ let email = "";
 const popup = document.querySelector("#popup");
 console.log(popup); 
 
-
-
-
 // ************ Event Listeners *************
 // same idea as using arrow notation
 // function getSentiment(e) {
@@ -32,20 +29,15 @@ const loadFormFunctions = () => {
         const btnWrapper = document.querySelector(".re-widget-btn-wrapper-f1");
         btnWrapper.addEventListener("click", getSentiment);
 
+        // Send data to API Gateway
+
+        
 
     }
 
-// Display re widget on scroll
-// window.addEventListener("scroll", myFunction);
-
-// function myFunction() {
-//     let widget = document.getElementById("re-widget")
-// need to add is hidden class to re-widget
-//     widget.classList.remove('is-hidden');
-// }
 
 const btn = document.querySelector("#submit")
-const likeBtn = document.querySelector('#')
+// const likeBtn = document.querySelector('#')
 
 // ******** Make getFromS3 its own helper function, parameter URL. ************
 // ******** loadFormFunctions needs to happen after async code ***********
@@ -56,10 +48,6 @@ async function getFromS3() {
     await fetch('https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/re_widget_f1.html', {
     }).then((response) => { 
         console.log("Response from S3")
-        // const res = response.text()
-
-        // console.log(response.json())
-        // return response.json();
         return response.text()
 
     }).then((text) => {
@@ -73,4 +61,14 @@ async function getFromS3() {
 
 btn.addEventListener("click", getFromS3);
 
+
+
+// Display re widget on scroll
+// window.addEventListener("scroll", myFunction);
+
+// function myFunction() {
+//     let widget = document.getElementById("re-widget")
+// need to add is hidden class to re-widget
+//     widget.classList.remove('is-hidden');
+// }
 
