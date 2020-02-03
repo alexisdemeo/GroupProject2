@@ -88,18 +88,23 @@ p.re-widget-fb-prompt {
     padding: 8px;
     margin: 5px;
     border-style: none;
-    background-color: rgba(77, 156, 224, 0.8);
+    background-color: rgba(77, 156, 224, 0.3);
     color: black;
     border-radius: 2px;
     cursor: pointer;
+}
+
+.re-widget-active {
+    background-color: rgba(77, 156, 224, 1);
+    color: white;
 }
 
 .re-widget-btn-category:focus {
     outline: 0;
 }
 
-.re-widget-btn-round-like,
-.re-widget-btn-round-dont {
+.re-widget-btn-like,
+.re-widget-btn-dont {
     border-radius: 50%;
     width: 50px;
     height: 50px;
@@ -108,8 +113,8 @@ p.re-widget-fb-prompt {
     cursor: pointer;
 }
 
-.re-widget-btn-round-like:focus,
-.re-widget-btn-round-dont:focus {
+.re-widget-btn-like:focus,
+.re-widget-btn-dont:focus {
     outline: 0;
 }
 
