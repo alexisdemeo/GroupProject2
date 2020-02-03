@@ -19,7 +19,103 @@ const firstFormURL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com
 const popup = document.querySelector("#popup");
 console.log(popup);
 
-// ************ Event Listeners *************
+// function that handles the active status for the categories on f2
+
+
+// function takes current form value and selects the appropriate form elements and adds listeners
+const loadFormEventListeners = (currentForm) => {
+    switch (currentForm) {
+        case 1:
+            // gets buttons
+            const likeBtn = document.querySelector(".re-widget-btn-like");
+            const dontBtn = document.querySelector(".re-widget-btn-dont");
+
+            // display previously saved values as active
+            if (sentimentTrack != "") {
+                // show selected sentiment as active
+            }
+
+            // passes sentiment for saving
+            likeBtn.addEventListener("click", setSentiment("like"));
+            dontBtn.addEventListener("click", setSentiment("dont"));
+
+            //needs to set the sentimentTrack variable to like or dont
+            likeBtn.addEventListener("click", formNavigation("like"));
+            dontBtn.addEventListener("click", formNavigation("dont"));
+
+            //exit button
+            // const exit = document.querySelector("re-widget-btn-exit");
+            break;
+
+        case 2:
+            // gets categories buttons
+            let categoryBtns = [];
+            categoryBtns = document.querySelectorAll("re-widget-btn-category");
+
+            // display previously saved values as active
+            if (category != "") {
+                // show selected category as active
+                //check if the category matches any of the category buttons text and make it active
+                for (i = 0; i < categoryBtns.length; i++) {
+                    if (categoryBtns[i].innerHTML == category) {
+                        categoryBtns[i].classList.add('re-widget-active');
+                    }
+                }
+
+            }
+
+            // gets next and back buttons
+            const backBtn = document.querySelector("re-widget-btn-back");
+            const nextBtn = document.querySelector("re-widget-btn-next");
+
+            // form navigation
+            backBtn.addEventListener("click", formNavigation("back"));
+            nextBtn.addEventListener("click", formNavigation("next"));
+
+            // exit button
+            // const exit = document.querySelector("re-widget-btn-exit");
+            break;
+
+        case 3:
+            // back and submit buttons
+            const backBtn = document.querySelector("re-widget-btn-back");
+            const submitBtn = document.querySelector("re-widget-btn-submit");
+
+            // display previously saved values as active
+            if (comments != "") {
+                // display comments
+                document.querySelector("re-widget-input-comments").innerHTML = comments;
+            }
+
+            if (email != "") {
+                // display email
+                document.querySelector("re-widget-input-email").innerHTML = email;
+            }
+
+            // get and save local values
+            submitBtn.addEventListener("click", function {
+                comments = document.querySelector("re-widget-input-comments").value;
+                email = document.querySelector("re-widget-input-email").value;
+            });
+
+            // form navigation
+            backBtn.addEventListener("click", formNavigation("back"));
+            submitBtn.addEventListener("click", formNavigation("submit"));
+
+            // exit button
+            // const exit = document.querySelector("re-widget-btn-exit");
+            break;
+
+        case 4:
+            // exit button
+            // const exit = document.querySelector("re-widget-btn-exit");
+            break;
+
+        default:
+            alert("Error");
+
+    }
+}
 
 // function sets the sentiment and saves value into local variable
 const setSentiment = (sentiment) => {
@@ -28,81 +124,11 @@ const setSentiment = (sentiment) => {
 }
 
 
-// function takes current form value and selects the appropriate form elements and adds listeners
-const loadFormEventListeners = (currentForm) => {
-    // const likeBtn = document.querySelector(".re-widget-btn-round-like");
-    // const dislikeBtn = document.querySelector(".re-widget-btn-round-dont");
-    // likeBtn.addEventListener("click", getSentiment);
-    // dislikeBtn.addEventListener("click", getSentiment); 
-    switch (currentForm) {
-
-        // const backBtn = document.querySelector("re-widget-btn-back");
-        // const NextBtn = document.querySelector("re-widget-btn-next");
-        // const submitBtn = document.querySelector("re-widget-btn-submit");
-        // const exitBtn = document.querySelector("re-widget-btn-exit");
-
-        // backBtn.addEventListener("click", formNavigation("back"));
-        // nextBtn.addEventListener("click", formNavigation("next"));
-        // submitBtn.addEventListener("click", formNavigation("submit"));
-
-        case 1:
-            // gets buttons
-            const likeBtn = document.querySelector(".re-widget-btn-like");
-            const dontBtn = document.querySelector(".re-widget-btn-dont");
-            // check if sentiment has been saved previously
-            if (sentimentTrack != "") {
-                // show selected sentiment as active
-            }
-            // sets event listener to set sentiment
-            likeBtn.addEventListener("click", setSentiment("like"));
-            dontBtn.addEventListener("click", setSentiment("dont"));
-
-            //needs to set the sentimentTrack variable to like or dont
-            likeBtn.addEventListener("click", formNavigation("like"));
-            dontBtn.addEventListener("click", formNavigation("dont"));
-
-            //exit button listener
-            break;
-
-        case 2:
-            // categories buttons
-            // next and back buttons
-            const backBtn = document.querySelector("re-widget-btn-back");
-            const NextBtn = document.querySelector("re-widget-btn-next");
-            // exit button
-            break;
-
-        case 3:
-            // back and submit buttons
-            const backBtn = document.querySelector("re-widget-btn-back");
-            // exit button
-            const submitBtn = document.querySelector("re-widget-btn-submit");
-            break;
-
-        case 4:
-            // exit button
-            const submitBtn = document.querySelector("re-widget-btn-submit");
-            break;
-
-        default:
-            alert("Error");
-
-    }
-
-}
-
-
-
-// test code below
-// const btn = document.querySelector("#submit")
-// const likeBtn = document.querySelector('#')
-
-
 // on load code that loads the first form (2 options for testing)
 // option 1
-window.onload = function() {
-    loadFromS3(firstFormURL);
-}
+// window.onload = function() {
+//     loadFromS3(firstFormURL);
+// }
 
 // option 2
 document.addEventListener("DOMContentLoaded", function() {
@@ -125,14 +151,6 @@ async function loadFromS3(url) {
     })
 
 }
-
-// btn.addEventListener("click", getFromS3);
-
-
-// Next and Back Button Logic
-
-
-
 
 // function that handles the navigation logic for the back, next 
 // and submit buttons and then passes it on to the navigation helper function
