@@ -1,4 +1,4 @@
-
+// variables to save information related to feedback
 let site = window.location.origin;
 let article = window.location.href;
 let positive_sentiment = "";
@@ -75,7 +75,7 @@ const loadFormEventListeners = (currentForm) => {
 
             // add event listener and save value
             categoryBtns.forEach(btn => {
-                btn.addEventListener("click", function () {
+                btn.addEventListener("click", function() {
                     category = event.target.value;
                 })
             });
@@ -106,7 +106,7 @@ const loadFormEventListeners = (currentForm) => {
             }
 
             // get and save local values
-            submitBtn.addEventListener("click", function () {
+            submitBtn.addEventListener("click", function() {
                 comments = document.querySelector('.re-widget-input-comments').value;
                 email = document.querySelector('.re-widget-input-email').value;
             });
@@ -146,7 +146,7 @@ const setSentiment = (sentiment) => {
 // }
 
 // option 2
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function() {
     loadFromS3(firstFormURL);
 });
 
