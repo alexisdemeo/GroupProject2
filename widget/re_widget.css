@@ -38,6 +38,10 @@
     text-decoration: none;
 }
 
+.re-widget-footer p a:visited {
+    color: inherit;
+}
+
 .re-widget-header {
     background-color: #4d9ce0;
     border-top-left-radius: 25px;
@@ -116,6 +120,11 @@ p.re-widget-fb-prompt {
 .re-widget-btn-like:focus,
 .re-widget-btn-dont:focus {
     outline: 0;
+}
+
+.re-widget-btn-like img,
+.re-widget-btn-dont img {
+    pointer-events: none;
 }
 
 .re-widget-img-like,

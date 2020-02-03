@@ -20,6 +20,7 @@ const firstFormURL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com
 // function that handles the active status for the categories on f2
 
 
+
 // function takes current form value and selects the appropriate form elements and adds listeners
 const loadFormEventListeners = (currentForm) => {
     switch (currentForm) {
