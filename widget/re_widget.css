@@ -17,7 +17,7 @@
     height: auto;
     width: 300px;
     border: none;
-    border-radius: 25px;
+    border-radius: 15px;
 }
 
 .re-widget-header p,
@@ -44,9 +44,12 @@
 
 .re-widget-header {
     background-color: #4d9ce0;
-    border-top-left-radius: 25px;
-    border-top-right-radius: 25px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
     color: #ffffff;
+    border-top: 1px solid rgba(77, 156, 224, 1);
+    border-left: 1px solid rgba(77, 156, 224, 1);
+    border-right: 1px solid rgba(77, 156, 224, 1);
     /* position: relative; */
 }
 
@@ -60,6 +63,9 @@ p.re-widget-fb-prompt {
     flex-basis: auto;
     flex-grow: 1;
     justify-content: center;
+    border-left: 1px solid rgba(0, 0, 0, .2);
+    border-right: 1px solid rgba(0, 0, 0, .2);
+    padding: 10px 0 10px 0;
 }
 
 .re-widget-body p {
@@ -89,12 +95,12 @@ p.re-widget-fb-prompt {
     flex-basis: 40%;
     width: auto;
     position: relative;
-    padding: 8px;
+    padding: 6px;
     margin: 5px;
     border-style: none;
-    background-color: rgba(77, 156, 224, 0.3);
+    background-color: rgba(0, 0, 0, .2);
     color: black;
-    border-radius: 2px;
+    border-radius: 5px;
     cursor: pointer;
 }
 
@@ -110,11 +116,12 @@ p.re-widget-fb-prompt {
 .re-widget-btn-like,
 .re-widget-btn-dont {
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
     position: relative;
     border-style: none;
     cursor: pointer;
+    background-color: rgba(0, 0, 0, .2);
 }
 
 .re-widget-btn-like:focus,
@@ -122,34 +129,35 @@ p.re-widget-fb-prompt {
     outline: 0;
 }
 
-.re-widget-btn-like img,
-.re-widget-btn-dont img {
-    pointer-events: none;
-}
-
 .re-widget-img-like,
 .re-widget-img-dont {
     position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
+    top: -8px;
+    left: -8px;
+    padding: 15px;
+    pointer-events: none;
+    height: 75%;
+    width: 75%;
 }
 
 .re-widget-footer {
     font-size: 8px;
     text-align: center;
-    border-top: 1px solid rgba(0, 0, 0, .2);
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 
 .re-widget-nav-wrapper {
     display: flex;
     justify-content: space-evenly;
     padding: 10px;
+    border-left: 1px solid rgba(0, 0, 0, .2);
+    border-right: 1px solid rgba(0, 0, 0, .2);
 }
 
 .re-widget-nav-wrapper button {
-    border-radius: 2px;
+    border-radius: 5px;
     padding: 5px 12px 5px 12px;
     cursor: pointer;
 }
@@ -171,7 +179,6 @@ p.re-widget-fb-prompt {
 }
 
 .re-widget-input-container-f3 {
-    /* max-width: 300px; */
     margin: 0 auto;
 }
 
