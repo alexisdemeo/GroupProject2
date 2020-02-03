@@ -16,9 +16,6 @@ let sentimentTrack = "";
 // first feedback form URL 
 const firstFormURL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/re_widget_f1.html";
 
-const popup = document.querySelector("#popup");
-console.log(popup);
-
 // function that handles the active status for the categories on f2
 
 
@@ -30,10 +27,11 @@ const loadFormEventListeners = (currentForm) => {
             const likeBtn = document.querySelector(".re-widget-btn-like");
             const dontBtn = document.querySelector(".re-widget-btn-dont");
 
+            // S2
             // display previously saved values as active
-            if (sentimentTrack != "") {
-                // show selected sentiment as active
-            }
+            // if (sentimentTrack != "") {
+            // show selected sentiment as active
+            // }
 
             // passes sentiment for saving
             likeBtn.addEventListener("click", setSentiment("like"));
@@ -43,14 +41,15 @@ const loadFormEventListeners = (currentForm) => {
             likeBtn.addEventListener("click", formNavigation("like"));
             dontBtn.addEventListener("click", formNavigation("dont"));
 
-            //exit button
+            // S2
+            // exit button
             // const exit = document.querySelector("re-widget-btn-exit");
             break;
 
         case 2:
-            // gets categories buttons
-            let categoryBtns = [];
-            categoryBtns = document.querySelectorAll("re-widget-btn-category");
+            // gets categories buttons into array
+            let categoryBtnsList = document.querySelectorAll(".re-widget-btn-category");
+            let categoryBtns = Array.from(categoryBtnsList);
 
             // display previously saved values as active
             if (category != "") {
@@ -61,54 +60,67 @@ const loadFormEventListeners = (currentForm) => {
                         categoryBtns[i].classList.add('re-widget-active');
                     }
                 }
-
-            }
+            };
 
             // gets next and back buttons
-            const backBtn = document.querySelector("re-widget-btn-back");
-            const nextBtn = document.querySelector("re-widget-btn-next");
+            const backBtn = document.querySelector(".re-widget-btn-back");
+            const nextBtn = document.querySelector(".re-widget-btn-next");
+
+            // save category selection
+            const wrapper = document.querySelector(".re-widget-btn-wrapper-f2");
+            wrapper.addEventListener("click", functionname);
+
+            // add event listener and save value
+            categoryBtns.forEach(btn => {
+                btn.addEventListener("click", function() {
+                    category = event.target.value;
+                })
+            });
 
             // form navigation
             backBtn.addEventListener("click", formNavigation("back"));
             nextBtn.addEventListener("click", formNavigation("next"));
 
+            // S2
             // exit button
             // const exit = document.querySelector("re-widget-btn-exit");
             break;
 
         case 3:
             // back and submit buttons
-            const backBtn = document.querySelector("re-widget-btn-back");
-            const submitBtn = document.querySelector("re-widget-btn-submit");
+            const backBtn = document.querySelector(".re-widget-btn-back");
+            const submitBtn = document.querySelector(".re-widget-btn-submit");
 
             // display previously saved values as active
             if (comments != "") {
                 // display comments
-                document.querySelector("re-widget-input-comments").innerHTML = comments;
+                document.querySelector(".re-widget-input-comments").innerHTML = comments;
             }
 
             if (email != "") {
                 // display email
-                document.querySelector("re-widget-input-email").innerHTML = email;
+                document.querySelector(".re-widget-input-email").innerHTML = email;
             }
 
             // get and save local values
             submitBtn.addEventListener("click", function {
-                comments = document.querySelector("re-widget-input-comments").value;
-                email = document.querySelector("re-widget-input-email").value;
+                comments = document.querySelector(".re-widget-input-comments").value;
+                email = document.querySelector(".re-widget-input-email").value;
             });
 
             // form navigation
             backBtn.addEventListener("click", formNavigation("back"));
             submitBtn.addEventListener("click", formNavigation("submit"));
 
+            // S2
             // exit button
-            // const exit = document.querySelector("re-widget-btn-exit");
+            // const exit = document.querySelector(".re-widget-btn-exit");
             break;
 
         case 4:
+            // S2
             // exit button
-            // const exit = document.querySelector("re-widget-btn-exit");
+            // const exit = document.querySelector(".re-widget-btn-exit");
             break;
 
         default:
@@ -123,7 +135,7 @@ const setSentiment = (sentiment) => {
     sentimentTrack = sentiment;
 }
 
-
+// S2
 // on load code that loads the first form (2 options for testing)
 // option 1
 // window.onload = function() {
@@ -133,18 +145,18 @@ const setSentiment = (sentiment) => {
 // option 2
 document.addEventListener("DOMContentLoaded", function() {
     loadFromS3(firstFormURL);
-})
+});
 
 // helper function that takes url and loads html from S3
 async function loadFromS3(url) {
 
     console.log("Fired")
     await fetch(url, {}).then((response) => {
-        console.log("Response from S3")
+        // console.log("Response from S3")
         return response.text()
 
     }).then((text) => {
-        console.log(text)
+        // console.log(text)
         popup.innerHTML = "";
         popup.innerHTML = text;
         loadFormEventListeners(currentForm);
@@ -186,6 +198,7 @@ function formNavigation(action) {
         // updates current form to the next form value
         currentForm = nextForm;
     } else if (action == "exit") {
+        // S2
         // logic for exit
         // trigger save logic here
 
@@ -198,55 +211,34 @@ function formNavigation(action) {
 // function takes the required form value and passes it 
 // on to S3 load helper function with the appropriate URL
 function navigationHelper(formToLoad, sentimentTrack) {
+
     switch (formToLoad) {
         case 1:
-            let f1URL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/re_widget_f1.html"
+            let f1URL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/re_widget_f1.html";
             loadFromS3(f1URL);
             break;
 
         case 2:
             if (sentimentTrack == "like") {
-                let f2LikeURL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/re_widget_f2.html"
-                loadFromS3(f2LikeURL)
+                let f2LikeURL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/re_widget_f2.html";
+                loadFromS3(f2LikeURL);
             } else {
-                let f2DontURL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/re_widget_f2.html"
-                loadFromS3(f2DontURL)
-            }
+                let f2DontURL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/re_widget_f2.html";
+                loadFromS3(f2DontURL);
+            };
             break;
 
         case 3:
-            let f3URL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/re_widget_f3.html"
-            loadFromS3(f3URL)
+            let f3URL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/re_widget_f3.html";
+            loadFromS3(f3URL);
             break;
 
         case 4:
-            let f4URL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/re_widget_f4.html"
-            loadFromS3(f4URL)
+            let f4URL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/re_widget_f4.html";
+            loadFromS3(f4URL);
             break;
 
         default:
-            alert("Error")
+            alert("Error");
     }
-    // pass url to helper function that gets html from S3
-
 }
-
-
-
-
-
-
-// Submit button Logic
-
-
-
-
-
-// Display re widget on scroll
-// window.addEventListener("scroll", myFunction);
-
-// function myFunction() {
-//     let widget = document.getElementById("re-widget")
-// need to add is hidden class to re-widget
-//     widget.classList.remove('is-hidden');
-// }
