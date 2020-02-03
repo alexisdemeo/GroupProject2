@@ -1,4 +1,3 @@
-
 // const btn = document.querySelector("#submit")
 // const content = document.querySelector("#re-widget")
 
@@ -40,5 +39,3 @@ const renderNext = () => {
 }
 
 b.addEventListener("click", renderNext)
-
-

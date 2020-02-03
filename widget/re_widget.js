@@ -16,6 +16,9 @@ let sentimentTrack = "";
 // first feedback form URL 
 const firstFormURL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/re_widget_f1.html";
 
+// Get div with ID "re-widget-container" from client side
+let reWidget = document.querySelector("#re-widget-container");
+
 //S2
 // function that handles the active status for the categories on f2
 
@@ -155,13 +158,11 @@ async function loadFromS3(url) {
 
     console.log("Fired")
     await fetch(url, {}).then((response) => {
-        // console.log("Response from S3")
         return response.text()
 
     }).then((text) => {
-        // console.log(text)
-        popup.innerHTML = "";
-        popup.innerHTML = text;
+        reWidget.innerHTML = "";
+        reWidget.innerHTML = text;
         loadFormEventListeners(currentForm);
     });
 }
