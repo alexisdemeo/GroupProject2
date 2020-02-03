@@ -1,6 +1,6 @@
-// variables for feedback form inputs as well as site and the relating article
-let site = "";
-let article = "";
+
+let site = window.location.origin;
+let article = window.location.href;
 let positive_sentiment = "";
 let category = "";
 let comments = "";
@@ -75,7 +75,7 @@ const loadFormEventListeners = (currentForm) => {
 
             // add event listener and save value
             categoryBtns.forEach(btn => {
-                btn.addEventListener("click", function() {
+                btn.addEventListener("click", function () {
                     category = event.target.value;
                 })
             });
@@ -106,7 +106,7 @@ const loadFormEventListeners = (currentForm) => {
             }
 
             // get and save local values
-            submitBtn.addEventListener("click", function() {
+            submitBtn.addEventListener("click", function () {
                 comments = document.querySelector('.re-widget-input-comments').value;
                 email = document.querySelector('.re-widget-input-email').value;
             });
@@ -146,7 +146,7 @@ const setSentiment = (sentiment) => {
 // }
 
 // option 2
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     loadFromS3(firstFormURL);
 });
 
@@ -243,4 +243,31 @@ function navigationHelper(formToLoad, sentimentTrack) {
         default:
             alert("Error");
     }
+}
+
+const createPayload = () => {
+    payload = {
+        site: site,
+        article: article,
+        positive_sentiment: positive_sentiment,
+        category: category,
+        comments: comments,
+        email: email
+    }
+    return payload
+}
+
+// Generate payload
+const payload = createPayload()
+
+// Send data to API Gateway
+const postData = () => {
+    fetch('https://sso03h7hyg.execute-api.ap-southeast-2.amazonaws.com/dev/feedback', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    })
 }
