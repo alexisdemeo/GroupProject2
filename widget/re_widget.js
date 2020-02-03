@@ -16,6 +16,7 @@ let sentimentTrack = "";
 // first feedback form URL 
 const firstFormURL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/re_widget_f1.html";
 
+//S2
 // function that handles the active status for the categories on f2
 
 
@@ -48,8 +49,9 @@ const loadFormEventListeners = (currentForm) => {
 
         case 2:
             // gets categories buttons into array
-            let categoryBtnsList = document.querySelectorAll('.re-widget-btn-category');
-            let categoryBtns = Array.from(categoryBtnsList);
+            // let categoryBtnsList = document.querySelectorAll('.re-widget-btn-category');
+            // let categoryBtns = Array.from(categoryBtnsList);
+            let categoryBtns = Array.from(document.querySelectorAll('.re-widget-btn-category'));
 
             // display previously saved values as active
             if (category != "") {
