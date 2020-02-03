@@ -222,6 +222,8 @@ function navigationHelper(formToLoad, sentimentTrack) {
 
 
 
+
+
 // Display re widget on scroll
 // window.addEventListener("scroll", myFunction);
 
