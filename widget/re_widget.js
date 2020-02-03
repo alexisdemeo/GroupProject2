@@ -48,7 +48,7 @@ const loadFormEventListeners = (currentForm) => {
 
         case 2:
             // gets categories buttons into array
-            let categoryBtnsList = document.querySelectorAll(".re-widget-btn-category");
+            let categoryBtnsList = document.querySelectorAll('.re-widget-btn-category');
             let categoryBtns = Array.from(categoryBtnsList);
 
             // display previously saved values as active
@@ -63,11 +63,11 @@ const loadFormEventListeners = (currentForm) => {
             };
 
             // gets next and back buttons
-            const backBtn = document.querySelector(".re-widget-btn-back");
-            const nextBtn = document.querySelector(".re-widget-btn-next");
+            const backBtn = document.querySelector('.re-widget-btn-back');
+            const nextBtn = document.querySelector('.re-widget-btn-next');
 
             // save category selection
-            const wrapper = document.querySelector(".re-widget-btn-wrapper-f2");
+            const wrapper = document.querySelector('.re-widget-btn-wrapper-f2');
             wrapper.addEventListener("click", functionname);
 
             // add event listener and save value
@@ -88,24 +88,24 @@ const loadFormEventListeners = (currentForm) => {
 
         case 3:
             // back and submit buttons
-            const backBtn = document.querySelector(".re-widget-btn-back");
-            const submitBtn = document.querySelector(".re-widget-btn-submit");
+            const backBtn = document.querySelector('.re-widget-btn-back');
+            const submitBtn = document.querySelector('.re-widget-btn-submit');
 
             // display previously saved values as active
             if (comments != "") {
                 // display comments
-                document.querySelector(".re-widget-input-comments").innerHTML = comments;
+                document.querySelector('.re-widget-input-comments').innerHTML = comments;
             }
 
             if (email != "") {
                 // display email
-                document.querySelector(".re-widget-input-email").innerHTML = email;
+                document.querySelector('.re-widget-input-email').innerHTML = email;
             }
 
             // get and save local values
-            submitBtn.addEventListener("click", function {
-                comments = document.querySelector(".re-widget-input-comments").value;
-                email = document.querySelector(".re-widget-input-email").value;
+            submitBtn.addEventListener("click", function() {
+                comments = document.querySelector('.re-widget-input-comments').value;
+                email = document.querySelector('.re-widget-input-email').value;
             });
 
             // form navigation
@@ -160,8 +160,7 @@ async function loadFromS3(url) {
         popup.innerHTML = "";
         popup.innerHTML = text;
         loadFormEventListeners(currentForm);
-    })
-
+    });
 }
 
 // function that handles the navigation logic for the back, next 
@@ -206,7 +205,7 @@ function formNavigation(action) {
         alert("Form Error");
     }
 
-}
+};
 
 // function takes the required form value and passes it 
 // on to S3 load helper function with the appropriate URL
