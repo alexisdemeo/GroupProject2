@@ -1,10 +1,10 @@
 // variables to save information related to feedback
 let site = window.location.origin;
 let article = window.location.href;
-let positive_sentiment = "";
-let category = "";
+let positive_sentiment = "blah";
+let category = "blah";
 let comments = "";
-let email = "";
+let email = "blah";
 
 // variable to track current form (default setting to 1 for F1)
 let currentForm = 1;
@@ -26,32 +26,10 @@ let data = "";
 //S2
 // function that handles the active status for the categories on f2
 
-// S2
-// on load code that loads the first form (2 options for testing)
-// option 1
+// on load code that loads the first form
 window.onload = function() {
     loadFromS3(firstFormURL)
-        // .then(data => {
-        //     reWidget.innerHTML = "";
-        //     reWidget.innerHTML = data;
-        //     loadFormEventListeners(currentForm);
-        // })
 }
-
-// function loadFromS3Helper() {
-//     loadFromS3(firstFormURL)
-//         .then(data => {
-//             reWidget.innerHTML = "";
-//             reWidget.innerHTML = data;
-//             loadFormEventListeners(currentForm);
-//         })
-// };
-
-// option 2
-// document.addEventListener("DOMContentLoaded", function() {
-
-// });
-
 
 // function takes current form value and selects the appropriate form elements and adds listeners
 const loadFormEventListeners = (currentForm) => {
@@ -95,21 +73,32 @@ const loadFormEventListeners = (currentForm) => {
 
         case 2:
             // display previously saved values as active
-            if (category != "") {
-                // show selected category as active
-                //check if the category matches any of the category buttons text and make it active
-                for (i = 0; i < categoryBtns.length; i++) {
-                    if (categoryBtns[i].innerHTML == category) {
-                        categoryBtns[i].classList.add('re-widget-active');
-                    }
-                }
-            };
+            // if (category != "") {
+            //     // show selected category as active
+            //     //check if the category matches any of the category buttons text and make it active
+            //     for (i = 0; i < categoryBtns.length; i++) {
+            //         if (categoryBtns[i].innerHTML == category) {
+            //             categoryBtns[i].classList.add('re-widget-active');
+            //         }
+            //     }
+            // };
 
             // add event listener and save value
             categoryBtns.forEach(btn => {
-                btn.addEventListener("click", function() {
-                    category = event.target.value;
+
+                // add event listener to btn
+                btn.addEventListener("click", function(event) {
+                    //remove all siblings with active class
+                    event.target.parentElement.querySelectorAll('.re-widget-active').forEach(event =>
+                        event.classList.remove('re-widget-active'));
+
+                    // add the class to the selected btn
+                    event.target.classList.add('re-widget-active');
+                    //storing the selected btn text as category
+                    category = event.target.innerHTML;
                 })
+
+
             });
 
             // form navigation
@@ -135,8 +124,12 @@ const loadFormEventListeners = (currentForm) => {
 
             // get and save local values
             submitBtn.addEventListener("click", function() {
+                // comments = "blah";
                 comments = document.querySelector('.re-widget-input-comments').value;
+                console.log(comments);
                 email = document.querySelector('.re-widget-input-email').value;
+                // email = "hello";
+                console.log(email);
             });
 
             // form navigation
@@ -178,10 +171,6 @@ async function loadFromS3(url) {
         reWidget.innerHTML = text;
         loadFormEventListeners(currentForm);
     });
-    // let response = await fetch(url);
-    // let data = await response.text();
-    // console.log("loadFromS3");
-    // return data;
 }
 
 // function that handles the navigation logic for the back, next 
@@ -215,12 +204,18 @@ function formNavigation(action) {
         // logic for submit
         // trigger save logic here
         // Generate payload
-        const payload = createPayload()
+        const payload = createPayload();
+        // post data to API Gateway
+        postData(payload);
 
-        let nextForm = currentForm + 1;
-        navigationHelper(nextForm, sentimentTrack);
+        // exit out of widget 
+        // reWidget.innerHTML = "";
+
+        // below is for ty page or whatever next page is
+        // let nextForm = currentForm + 1;
+        // navigationHelper(nextForm, sentimentTrack);
         // updates current form to the next form value
-        currentForm = nextForm;
+        // currentForm = nextForm;
     } else if (action == "exit") {
         // S2
         // logic for exit
@@ -281,12 +276,13 @@ const createPayload = () => {
 }
 
 // Send data to API Gateway
-const postData = () => {
+const postData = (payload) => {
     fetch('https://sso03h7hyg.execute-api.ap-southeast-2.amazonaws.com/dev/feedback', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
+
         },
         body: JSON.stringify(payload)
     })
