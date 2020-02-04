@@ -1,10 +1,10 @@
 // variables to save information related to feedback
 let site = window.location.origin;
 let article = window.location.href;
-let positive_sentiment = "blah";
-let category = "blah";
+let positive_sentiment = "";
+let category = "0";
 let comments = "";
-let email = "blah";
+let email = "";
 
 // variable to track current form (default setting to 1 for F1)
 let currentForm = 1;
@@ -124,12 +124,14 @@ const loadFormEventListeners = (currentForm) => {
 
             // get and save local values
             submitBtn.addEventListener("click", function() {
-                // comments = "blah";
                 comments = document.querySelector('.re-widget-input-comments').value;
-                console.log(comments);
+                if (comments == "") {
+                    comments = "0"
+                }
                 email = document.querySelector('.re-widget-input-email').value;
-                // email = "hello";
-                console.log(email);
+                if (email == "") {
+                    email = "0"
+                }
             });
 
             // form navigation
