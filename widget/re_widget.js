@@ -31,11 +31,11 @@ let data = "";
 // option 1
 window.onload = function() {
     loadFromS3(firstFormURL)
-        .then(data => {
-            reWidget.innerHTML = "";
-            reWidget.innerHTML = data;
-            loadFormEventListeners(currentForm);
-        })
+        // .then(data => {
+        //     reWidget.innerHTML = "";
+        //     reWidget.innerHTML = data;
+        //     loadFormEventListeners(currentForm);
+        // })
 }
 
 // function loadFromS3Helper() {
@@ -164,23 +164,24 @@ const loadFormEventListeners = (currentForm) => {
 const setSentiment = (sentiment) => {
     positive_sentiment = sentiment;
     sentimentTrack = sentiment;
+    console.log(sentiment);
 }
 
 // helper function that takes url and loads html from S3
 async function loadFromS3(url) {
-    // console.log("Fired")
-    // await fetch(url, {}).then((response) => {
-    //     return response.text()
-    // }).then((text) => {
-    //     console.log(text);
-    //     reWidget.innerHTML = "";
-    //     reWidget.innerHTML = text;
-    //     loadFormEventListeners(currentForm);
-    // });
-    let response = await fetch(url);
-    let data = await response.text();
     console.log("loadFromS3");
-    return data;
+    await fetch(url, {}).then((response) => {
+        return response.text()
+    }).then((text) => {
+        console.log(text);
+        reWidget.innerHTML = "";
+        reWidget.innerHTML = text;
+        loadFormEventListeners(currentForm);
+    });
+    // let response = await fetch(url);
+    // let data = await response.text();
+    // console.log("loadFromS3");
+    // return data;
 }
 
 // function that handles the navigation logic for the back, next 
