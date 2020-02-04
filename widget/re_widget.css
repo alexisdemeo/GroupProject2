@@ -17,24 +17,23 @@
     height: auto;
     width: 300px;
     border: none;
-    border-radius: 15px;
+    border-radius: 20px;
 }
 
 .re-widget-header p,
 .re-widget-body p {
     text-align: center;
     margin: 0;
-    padding: 10px;
-    font-size: 12px;
+    padding: 25px 10px 25px 10px;
+    font-size: 14px;
 }
 
 .re-widget-footer p {
     margin: 0;
-    padding: 6px;
+    padding: 4px;
 }
 
 .re-widget-footer p a {
-    font-size: 10px;
     text-decoration: none;
 }
 
@@ -100,8 +99,9 @@ p.re-widget-fb-prompt {
     border-style: none;
     background-color: rgba(0, 0, 0, .2);
     color: black;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
+    font-size: 12px;
 }
 
 .re-widget-active {
@@ -118,7 +118,7 @@ p.re-widget-fb-prompt {
     border-radius: 50%;
     width: 55px;
     height: 55px;
-    padding: 8px;
+    padding: 10px;
     position: relative;
     border-style: none;
     cursor: pointer;
@@ -138,23 +138,26 @@ p.re-widget-fb-prompt {
 }
 
 .re-widget-footer {
-    font-size: 8px;
+    font-size: 9px;
     text-align: center;
-    border: 1px solid rgba(0, 0, 0, .2);
+    border-top: 1px solid rgba(0, 0, 0, 1);
+    border-right: 1px solid rgba(0, 0, 0, .2);
+    border-left: 1px solid rgba(0, 0, 0, .2);
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
 }
 
 .re-widget-nav-wrapper {
     display: flex;
-    justify-content: space-evenly;
-    padding: 10px;
+    justify-content: space-between;
+    padding: 10px 17px 10px 17px;
     border-left: 1px solid rgba(0, 0, 0, .2);
     border-right: 1px solid rgba(0, 0, 0, .2);
 }
 
 .re-widget-nav-wrapper button {
-    border-radius: 5px;
+    border-radius: 20px;
     padding: 5px 12px 5px 12px;
     cursor: pointer;
 }
@@ -189,20 +192,21 @@ p.re-widget-fb-prompt {
 .re-widget-input-email {
     height: auto;
     flex-basis: 100%;
-    width: 220px;
+    width: 245px;
     position: relative;
     padding: 8px;
     margin: 5px;
     border-style: none;
     color: black;
-    border-radius: 2px;
+    border-radius: 10px;
     cursor: pointer;
     border: 1px solid rgba(0, 0, 0, .2);
+    font-size: 12px;
 }
 
 .re-widget-input-comments {
     resize: none;
-    min-height: 100px;
+    min-height: 80px;
 }
 
 .re-widget-input-comments:focus,
