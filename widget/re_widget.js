@@ -2,9 +2,23 @@
 let site = window.location.origin;
 let article = window.location.href;
 let positive_sentiment = "";
-let category = "0";
+// let category = "0";
 let comments = "";
 let email = "";
+
+// Categories 
+let cat1 = "0";
+let cat2 = "0";
+let cat3 = "0";
+let cat4 = "0";
+let cat5 = "0";
+let cat6 = "0";
+let cat7 = "0";
+let cat8 = "0";
+
+
+// Temporary array that will later be used to populate category
+let selectedCategories = [];
 
 // variable to track current form (default setting to 1 for F1)
 let currentForm = 1;
@@ -27,7 +41,7 @@ let data = "";
 // function that handles the active status for the categories on f2
 
 // on load code that loads the first form
-window.onload = function() {
+window.onload = function () {
     loadFromS3(firstFormURL)
 }
 
@@ -59,12 +73,12 @@ const loadFormEventListeners = (currentForm) => {
             // }
 
             // passes sentiment for saving
-            likeBtn.addEventListener("click", function() { setSentiment("like") });
-            dontBtn.addEventListener("click", function() { setSentiment("dont") });
+            likeBtn.addEventListener("click", function () { setSentiment("like") });
+            dontBtn.addEventListener("click", function () { setSentiment("dont") });
 
             //needs to set the sentimentTrack variable to like or dont
-            likeBtn.addEventListener("click", function() { formNavigation("like") });
-            dontBtn.addEventListener("click", function() { formNavigation("dont") });
+            likeBtn.addEventListener("click", function () { formNavigation("like") });
+            dontBtn.addEventListener("click", function () { formNavigation("dont") });
 
             // S2
             // exit button
@@ -86,24 +100,28 @@ const loadFormEventListeners = (currentForm) => {
             // add event listener and save value
             categoryBtns.forEach(btn => {
 
-                // add event listener to btn
-                btn.addEventListener("click", function(event) {
-                    //remove all siblings with active class
-                    event.target.parentElement.querySelectorAll('.re-widget-active').forEach(event =>
-                        event.classList.remove('re-widget-active'));
-
-                    // add the class to the selected btn
-                    event.target.classList.add('re-widget-active');
-                    //storing the selected btn text as category
-                    category = event.target.innerHTML;
+                btn.addEventListener("click", function (event) {
+                    toggleSelected(event)
                 })
 
-
+                const toggleSelected = (event) => {
+                    if (event.target.classList.contains('re-widget-active')) {
+                        event.target.classList.remove('re-widget-active');
+                        const index = selectedCategories.indexOf(event.target.innerHTML);
+                        if (index > -1) {
+                            selectedCategories.splice(index, 1);
+                        }
+                    } else {
+                        event.target.classList.add('re-widget-active');
+                        selectedCategories.push(event.target.innerHTML)
+                    }
+                    console.log(selectedCategories)
+                }
             });
 
             // form navigation
-            backBtn.addEventListener("click", function() { formNavigation("back") });
-            nextBtn.addEventListener("click", function() { formNavigation("next") });
+            backBtn.addEventListener("click", function () { formNavigation("back") });
+            nextBtn.addEventListener("click", function () { formNavigation("next") });
 
             // S2
             // exit button
@@ -123,7 +141,7 @@ const loadFormEventListeners = (currentForm) => {
             }
 
             // get and save local values
-            submitBtn.addEventListener("click", function() {
+            submitBtn.addEventListener("click", function () {
                 comments = document.querySelector('.re-widget-input-comments').value;
                 if (comments == "") {
                     comments = "0"
@@ -135,8 +153,8 @@ const loadFormEventListeners = (currentForm) => {
             });
 
             // form navigation
-            backBtn.addEventListener("click", function() { formNavigation("back") });
-            submitBtn.addEventListener("click", function() { formNavigation("submit") });
+            backBtn.addEventListener("click", function () { formNavigation("back") });
+            submitBtn.addEventListener("click", function () { formNavigation("submit") });
 
             // S2
             // exit button
@@ -206,12 +224,24 @@ function formNavigation(action) {
         // logic for submit
         // trigger save logic here
         // Generate payload
+
+
+        for (let i = 0; i < selectedCategories.length; i++) {
+            console.log("Selected Categories")
+            // console.log(selectedCategories[i])
+            this["cat" + (i + 1)] = selectedCategories[i];
+            console.log("PRINT" + cat1)
+        }
+
+        console.log(cat1)
+        console.log(cat2)
+
         const payload = createPayload();
         // post data to API Gateway
         postData(payload);
 
         // exit out of widget 
-        // reWidget.innerHTML = "";
+        reWidget.innerHTML = "";
 
         // below is for ty page or whatever next page is
         // let nextForm = currentForm + 1;
@@ -270,7 +300,15 @@ const createPayload = () => {
         site: site,
         article: article,
         positive_sentiment: positive_sentiment,
-        category: category,
+        // category: category,
+        cat1: cat1,
+        cat2: cat2,
+        cat3: cat3,
+        cat4: cat4,
+        cat5: cat5,
+        cat6: cat6,
+        cat7: cat7,
+        cat8: cat8,
         comments: comments,
         email: email
     }
