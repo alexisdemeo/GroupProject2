@@ -45,8 +45,6 @@ const loadFormEventListeners = (currentForm) => {
     let submitBtn = document.querySelector('.re-widget-btn-submit');
 
     // gets categories buttons into array
-    // let categoryBtnsList = document.querySelectorAll('.re-widget-btn-category');
-    // let categoryBtns = Array.from(categoryBtnsList);
     let categoryBtns = Array.from(document.querySelectorAll('.re-widget-btn-category'));
 
     switch (currentForm) {
@@ -211,7 +209,7 @@ function formNavigation(action) {
         postData(payload);
 
         // exit out of widget 
-        // reWidget.innerHTML = "";
+        reWidget.innerHTML = "";
 
         // below is for ty page or whatever next page is
         // let nextForm = currentForm + 1;
