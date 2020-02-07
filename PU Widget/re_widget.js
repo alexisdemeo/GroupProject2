@@ -51,37 +51,25 @@ const loadFormEventListeners = (currentForm) => {
     console.log("loadFormEventListeners");
     // declare all the buttons for switch cases
     let likeBtn = document.querySelector('.re-widget-btn-like');
-    // console.log(likeBtn);
     let dontBtn = document.querySelector('.re-widget-btn-dont');
-
-    // back, next and submit buttons
     let backBtn = document.querySelector('.re-widget-btn-back');
     let nextBtn = document.querySelector('.re-widget-btn-next');
     let submitBtn = document.querySelector('.re-widget-btn-submit');
-
+    let exitBtn = document.querySelector('.re-widget-exit-button');
     // gets categories buttons into array
     let categoryBtns = Array.from(document.querySelectorAll('.re-widget-btn-category'));
 
     switch (currentForm) {
         case 1:
             console.log("is firing current form 1");
-            // S2
-            // display previously saved values as active
-            // if (sentimentTrack != "") {
-            // show selected sentiment as active
-            // }
-
             // passes sentiment for saving
             likeBtn.addEventListener("click", function() { setSentiment("like") });
             dontBtn.addEventListener("click", function() { setSentiment("dont") });
-
-            //needs to set the sentimentTrack variable to like or dont
+            // form navigation
             likeBtn.addEventListener("click", function() { formNavigation("like") });
             dontBtn.addEventListener("click", function() { formNavigation("dont") });
-
-            // S2
             // exit button
-            // const exit = document.querySelector("re-widget-btn-exit");
+            exitBtn.addEventListener("click", function() { formNavigation("exit") });
             break;
 
         case 2:
@@ -121,10 +109,8 @@ const loadFormEventListeners = (currentForm) => {
             // form navigation
             backBtn.addEventListener("click", function() { formNavigation("back") });
             nextBtn.addEventListener("click", function() { formNavigation("next") });
-
-            // S2
             // exit button
-            // const exit = document.querySelector("re-widget-btn-exit");
+            exitBtn.addEventListener("click", function() { formNavigation("exit") });
             break;
 
         case 3:
@@ -154,21 +140,17 @@ const loadFormEventListeners = (currentForm) => {
             // form navigation
             backBtn.addEventListener("click", function() { formNavigation("back") });
             submitBtn.addEventListener("click", function() { formNavigation("submit") });
-
-            // S2
             // exit button
-            // const exit = document.querySelector(".re-widget-btn-exit");
+            exitBtn.addEventListener("click", function() { formNavigation("exit") });
             break;
 
         case 4:
-            // S2
             // exit button
-            // const exit = document.querySelector(".re-widget-btn-exit");
+            exitBtn.addEventListener("click", function() { formNavigation("exit") });
             break;
 
         default:
             alert("Error");
-
     }
 }
 
@@ -176,7 +158,6 @@ const loadFormEventListeners = (currentForm) => {
 const setSentiment = (sentiment) => {
     positive_sentiment = sentiment;
     sentimentTrack = sentiment;
-    console.log(sentiment);
 }
 
 // helper function that takes url and loads html from S3
@@ -199,29 +180,24 @@ function formNavigation(action) {
 
     if (action == "like" || action == "dont") {
         console.log("like or dont");
-
-        // CAN WE MAKE THIS BETTER BY REMOVING NEXTFORM?? 
-        // COULD IT BE navhelper(currentform+1, sentimenttrack)?
         let nextForm = currentForm + 1;
         navigationHelper(nextForm, sentimentTrack);
-        // updates current form to the previous form value
         currentForm = nextForm;
 
     } else if (action == "back") {
-        // logic for back
+        // logic for back button
         let previousForm = currentForm - 1;
         navigationHelper(previousForm, sentimentTrack);
-        // updates current form to the previous form value
         currentForm = previousForm;
 
     } else if (action == "next") {
-        // logic for next
+        // logic for next button
         let nextForm = currentForm + 1;
         navigationHelper(nextForm, sentimentTrack);
-        // updates current form to the next form value
         currentForm = nextForm;
 
     } else if (action == "submit") {
+        // logic for submit button
         // Prepare local variables for saving
         categoryPrep();
         categoryAllocation();
@@ -229,14 +205,9 @@ function formNavigation(action) {
         const payload = createPayload();
         // post data to API Gateway
         postData(payload);
-
-        // exit out of widget 
-        // reWidget.innerHTML = "";
-
-        // display f4
+        // display final form
         let nextForm = currentForm + 1;
         navigationHelper(nextForm, sentimentTrack);
-        // updates current form to the next form value
         currentForm = nextForm;
 
     } else if (action == "exit") {
@@ -328,6 +299,7 @@ function navigationHelper(formToLoad, sentimentTrack) {
     }
 }
 
+// Generate the JSON payload
 const createPayload = () => {
     payload = {
         site: site,
