@@ -18,7 +18,11 @@ let cat8 = "0";
 
 
 // Temporary array that will later be used to populate category
-let selectedCategories = [];
+// Set this array length to the max number of categories that could
+// be selected (8)
+let selectedCategories = Array.from(Array(8).keys())
+
+
 
 // variable to track current form (default setting to 1 for F1)
 let currentForm = 1;
@@ -223,17 +227,8 @@ function formNavigation(action) {
         // trigger save logic here
         // Generate payload
 
-
-        for (let i = 0; i < selectedCategories.length; i++) {
-            console.log("Selected Categories")
-                // console.log(selectedCategories[i])
-            this["cat" + (i + 1)] = selectedCategories[i];
-            console.log("PRINT" + cat1)
-        }
-
-        console.log(cat1)
-        console.log(cat2)
-
+        categoryPrep();
+        categoryAllocation();
         const payload = createPayload();
         // post data to API Gateway
         postData(payload);
@@ -256,6 +251,52 @@ function formNavigation(action) {
     }
 
 };
+
+// function loops through selectedCategories length (8) 
+// and when value string is not empty then put "0". Now we have a 
+// string with either valid categories or "0"
+function categoryPrep() {
+    for (let i = 0; i < selectedCategories.length; i++) {
+        console.log("Selected Categories")
+        if (selectedCategories[i] == "") {
+            selectedCategories[i] = "0";
+        }
+    }
+}
+
+// function loops through the selectedCategories array and allocates
+// values to appropriate variables
+function categoryAllocation() {
+    for (let i = 0; i < selectedCategories.length; i++) {
+        console.log("Selected Categories")
+        switch (i) {
+            case 0:
+                cat1 = selectedCategories[i];
+                break;
+            case 1:
+                cat2 = selectedCategories[i];
+                break;
+            case 2:
+                cat3 = selectedCategories[i];
+                break;
+            case 3:
+                cat4 = selectedCategories[i];
+                break;
+            case 4:
+                cat5 = selectedCategories[i];
+                break;
+            case 5:
+                cat6 = selectedCategories[i];
+                break;
+            case 6:
+                cat7 = selectedCategories[i];
+                break;
+            case 7:
+                cat8 = selectedCategories[i];
+                break;
+        }
+    }
+}
 
 // function takes the required form value and passes it 
 // on to S3 load helper function with the appropriate URL
