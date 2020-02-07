@@ -41,7 +41,7 @@ let data = "";
 // function that handles the active status for the categories on f2
 
 // on load code that loads the first form
-window.onload = function () {
+window.onload = function() {
     loadFromS3(firstFormURL)
 }
 
@@ -71,12 +71,12 @@ const loadFormEventListeners = (currentForm) => {
             // }
 
             // passes sentiment for saving
-            likeBtn.addEventListener("click", function () { setSentiment("like") });
-            dontBtn.addEventListener("click", function () { setSentiment("dont") });
+            likeBtn.addEventListener("click", function() { setSentiment("like") });
+            dontBtn.addEventListener("click", function() { setSentiment("dont") });
 
             //needs to set the sentimentTrack variable to like or dont
-            likeBtn.addEventListener("click", function () { formNavigation("like") });
-            dontBtn.addEventListener("click", function () { formNavigation("dont") });
+            likeBtn.addEventListener("click", function() { formNavigation("like") });
+            dontBtn.addEventListener("click", function() { formNavigation("dont") });
 
             // S2
             // exit button
@@ -98,7 +98,7 @@ const loadFormEventListeners = (currentForm) => {
             // add event listener and save value
             categoryBtns.forEach(btn => {
 
-                btn.addEventListener("click", function (event) {
+                btn.addEventListener("click", function(event) {
                     toggleSelected(event)
                 })
 
@@ -118,8 +118,8 @@ const loadFormEventListeners = (currentForm) => {
             });
 
             // form navigation
-            backBtn.addEventListener("click", function () { formNavigation("back") });
-            nextBtn.addEventListener("click", function () { formNavigation("next") });
+            backBtn.addEventListener("click", function() { formNavigation("back") });
+            nextBtn.addEventListener("click", function() { formNavigation("next") });
 
             // S2
             // exit button
@@ -139,7 +139,7 @@ const loadFormEventListeners = (currentForm) => {
             }
 
             // get and save local values
-            submitBtn.addEventListener("click", function () {
+            submitBtn.addEventListener("click", function() {
                 comments = document.querySelector('.re-widget-input-comments').value;
                 if (comments == "") {
                     comments = "0"
@@ -151,8 +151,8 @@ const loadFormEventListeners = (currentForm) => {
             });
 
             // form navigation
-            backBtn.addEventListener("click", function () { formNavigation("back") });
-            submitBtn.addEventListener("click", function () { formNavigation("submit") });
+            backBtn.addEventListener("click", function() { formNavigation("back") });
+            submitBtn.addEventListener("click", function() { formNavigation("submit") });
 
             // S2
             // exit button
@@ -226,7 +226,7 @@ function formNavigation(action) {
 
         for (let i = 0; i < selectedCategories.length; i++) {
             console.log("Selected Categories")
-            // console.log(selectedCategories[i])
+                // console.log(selectedCategories[i])
             this["cat" + (i + 1)] = selectedCategories[i];
             console.log("PRINT" + cat1)
         }
