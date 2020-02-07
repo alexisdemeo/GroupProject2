@@ -77,7 +77,9 @@ const loadFormEventListeners = (currentForm) => {
             //     }
             // };
 
-            // add event listener and save value
+            // add event listener to all category buttons
+            // toggle active class and save values to 
+            // selecteCategories array for later use
             categoryBtns.forEach(btn => {
 
                 btn.addEventListener("click", function(event) {
@@ -283,6 +285,7 @@ function navigationHelper(formToLoad, sentimentTrack) {
             break;
 
         case 4:
+            // NEED TO UPDATE THIS URL
             let f4URL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/re_widget_f4.html";
             loadFromS3(f4URL);
             break;

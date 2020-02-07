@@ -205,8 +205,8 @@
             border-color: #4d9ce0;
         }
         
-        .re-widget-btn-next i,
-        .re-widget-btn-submit i {
+        .re-widget-btn-next img,
+        .re-widget-btn-submit img {
             pointer-events: none;
         }
         
@@ -281,6 +281,6 @@
             border: 1px solid rgba(77, 156, 224, 1);
         }
         
-        .re-widget-exit-button i {
+        .re-widget-exit-button img {
             pointer-events: none;
         }
