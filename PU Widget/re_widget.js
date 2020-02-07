@@ -31,15 +31,8 @@ let sentimentTrack = "";
 // first feedback form URL 
 const firstFormURL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/re_widget_f1.html";
 
-// 
-
 // Get div with ID "re-widget-container" from client side
 let reWidget = document.querySelector("#re-widget-container");
-
-let data = "";
-
-//S2
-// function that handles the active status for the categories on f2
 
 // on load code that loads the first form
 window.onload = function() {
