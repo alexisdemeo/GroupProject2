@@ -205,6 +205,11 @@
             border-color: #4d9ce0;
         }
         
+        .re-widget-btn-next i,
+        .re-widget-btn-submit i {
+            pointer-events: none;
+        }
+        
         .re-widget-input-container-f3 {
             margin: 0 auto;
         }
@@ -274,4 +279,8 @@
             height: 35px;
             width: 35px;
             border: 1px solid rgba(77, 156, 224, 1);
+        }
+        
+        .re-widget-exit-button i {
+            pointer-events: none;
         }
