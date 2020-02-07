@@ -16,13 +16,10 @@ let cat6 = "0";
 let cat7 = "0";
 let cat8 = "0";
 
-
 // Temporary array that will later be used to populate category
 // Set this array length to the max number of categories that could
 // be selected (8)
 let selectedCategories = Array.from(Array(8).keys())
-
-
 
 // variable to track current form (default setting to 1 for F1)
 let currentForm = 1;
@@ -202,6 +199,9 @@ function formNavigation(action) {
 
     if (action == "like" || action == "dont") {
         console.log("like or dont");
+
+        // CAN WE MAKE THIS BETTER BY REMOVING NEXTFORM?? 
+        // COULD IT BE navhelper(currentform+1, sentimenttrack)?
         let nextForm = currentForm + 1;
         navigationHelper(nextForm, sentimentTrack);
         // updates current form to the previous form value
@@ -216,40 +216,34 @@ function formNavigation(action) {
 
     } else if (action == "next") {
         // logic for next
-        // trigger save logic here
         let nextForm = currentForm + 1;
         navigationHelper(nextForm, sentimentTrack);
         // updates current form to the next form value
         currentForm = nextForm;
 
     } else if (action == "submit") {
-        // logic for submit
-        // trigger save logic here
-        // Generate payload
-
+        // Prepare local variables for saving
         categoryPrep();
         categoryAllocation();
+        // Generate payload
         const payload = createPayload();
         // post data to API Gateway
         postData(payload);
 
         // exit out of widget 
-        reWidget.innerHTML = "";
+        // reWidget.innerHTML = "";
 
-        // below is for ty page or whatever next page is
-        // let nextForm = currentForm + 1;
-        // navigationHelper(nextForm, sentimentTrack);
+        // display f4
+        let nextForm = currentForm + 1;
+        navigationHelper(nextForm, sentimentTrack);
         // updates current form to the next form value
-        // currentForm = nextForm;
-    } else if (action == "exit") {
-        // S2
-        // logic for exit
-        // trigger save logic here
+        currentForm = nextForm;
 
+    } else if (action == "exit") {
+        reWidget.innerHTML = "";
     } else {
         alert("Form Error");
     }
-
 };
 
 // function loops through selectedCategories length (8) 
