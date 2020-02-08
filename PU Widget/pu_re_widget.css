@@ -246,20 +246,19 @@ p.re-widget-fb-prompt {
     position: absolute;
     top: -14px;
     right: -14px;
-    border-radius: 50%;
+    border: none;
     margin: auto;
-    font-size: 16px;
     height: 35px;
     width: 35px;
-    border: 1px solid rgba(77, 156, 224, 1);
-    color: black;
-    background-color: white;
+    background-color: transparent;
 }
 
-
-/* update tag to img later */
-
-.re-widget-exit-button i {
+.re-widget-exit-button img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: inherit;
+    width: inherit;
     pointer-events: none;
 }
 
