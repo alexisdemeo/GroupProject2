@@ -280,6 +280,7 @@
             width: 35px;
             border: 1px solid rgba(77, 156, 224, 1);
             color: black;
+            background-color: white;
         }
         
         .re-widget-exit-button img {
@@ -303,4 +304,8 @@
             background-color: white;
             color: rgba(77, 156, 224, 1);
             border: 1px solid rgba(77, 156, 224, 1);
+        }
+        
+        .re-link-wrapper-f4 a:hover {
+            background-color: rgba(77, 156, 224, 1);
         }
