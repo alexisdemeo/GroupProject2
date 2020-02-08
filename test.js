@@ -39,3 +39,20 @@ const renderNext = () => {
 }
 
 b.addEventListener("click", renderNext)
+
+
+// {
+//     "site": "site",
+//     "article": "article",
+//     "positive_sentiment":"positive_sentiment",
+    // "cat1": "cat10",
+    // "cat2": "cat20",
+    // "cat3": "cat30",
+    // "cat4": "cat40",
+    // "cat5": "cat50",
+    // "cat6": "cat60",
+    // "cat7": "cat70",
+//     "cat8": "cat80",
+//     "comments": "comments",
+//     "email": "email" 
+//  }
