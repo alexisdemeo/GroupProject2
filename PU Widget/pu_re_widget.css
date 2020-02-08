@@ -239,6 +239,9 @@ p.re-widget-fb-prompt {
     color: inherit;
 }
 
+
+/* Exit Button */
+
 .re-widget-exit-button {
     position: absolute;
     top: -14px;
@@ -256,4 +259,25 @@ p.re-widget-fb-prompt {
 
 .re-widget-exit-button i {
     pointer-events: none;
+}
+
+
+/* Hover CSS for all buttons */
+
+.re-widget-btn-like:hover,
+.re-widget-btn-dont:hover,
+.re-widget-btn-category:hover {
+    background-color: rgba(77, 156, 224, 1);
+}
+
+.re-widget-btn-back:hover {
+    background-color: rgba(77, 156, 224, 1);
+    color: white;
+}
+
+.re-widget-btn-next:hover,
+.re-widget-btn-submit:hover {
+    background-color: white;
+    color: rgba(77, 156, 224, 1);
+    border: 1px solid rgba(77, 156, 224, 1);
 }
