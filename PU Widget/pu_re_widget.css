@@ -253,6 +253,11 @@ p.re-widget-fb-prompt {
     background-color: transparent;
 }
 
+.re-widget-exit-button:focus,
+.re-widget-exit-button:active {
+    outline: 0;
+}
+
 .re-widget-exit-button img {
     position: absolute;
     top: 0;
