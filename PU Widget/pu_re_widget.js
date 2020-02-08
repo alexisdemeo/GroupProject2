@@ -46,7 +46,7 @@ const loadFormEventListeners = (currentForm) => {
     let backBtn = document.querySelector('.re-widget-btn-back');
     let nextBtn = document.querySelector('.re-widget-btn-next');
     let submitBtn = document.querySelector('.re-widget-btn-submit');
-    // let exitBtn = document.querySelector('.re-widget-exit-button');
+    let exitBtn = document.querySelector('.re-widget-exit-button');
     // gets categories buttons into array
     let categoryBtns = Array.from(document.querySelectorAll('.re-widget-btn-category'));
 
@@ -60,7 +60,7 @@ const loadFormEventListeners = (currentForm) => {
             likeBtn.addEventListener("click", function() { formNavigation("like") });
             dontBtn.addEventListener("click", function() { formNavigation("dont") });
             // exit button
-            // exitBtn.addEventListener("click", function() { formNavigation("exit") });
+            exitBtn.addEventListener("click", function() { formNavigation("exit") });
             break;
 
         case 2:
@@ -103,7 +103,7 @@ const loadFormEventListeners = (currentForm) => {
             backBtn.addEventListener("click", function() { formNavigation("back") });
             nextBtn.addEventListener("click", function() { formNavigation("next") });
             // exit button
-            // exitBtn.addEventListener("click", function() { formNavigation("exit") });
+            exitBtn.addEventListener("click", function() { formNavigation("exit") });
             break;
 
         case 3:
@@ -134,12 +134,12 @@ const loadFormEventListeners = (currentForm) => {
             backBtn.addEventListener("click", function() { formNavigation("back") });
             submitBtn.addEventListener("click", function() { formNavigation("submit") });
             // exit button
-            // exitBtn.addEventListener("click", function() { formNavigation("exit") });
+            exitBtn.addEventListener("click", function() { formNavigation("exit") });
             break;
 
         case 4:
             // exit button
-            // exitBtn.addEventListener("click", function() { formNavigation("exit") });
+            exitBtn.addEventListener("click", function() { formNavigation("exit") });
             break;
 
         default:
@@ -249,28 +249,27 @@ function navigationHelper(formToLoad, sentimentTrack) {
 
     switch (formToLoad) {
         case 1:
-            let f1URL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/re_widget_f1.html";
+            let f1URL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/PU+Widget/pu_re_widget_f1.html";
             loadFromS3(f1URL);
             break;
 
         case 2:
             if (sentimentTrack == "like") {
-                let f2LikeURL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/re_widget_f2_like.html";
+                let f2LikeURL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/PU+Widget/pu_re_widget_f2_like.html";
                 loadFromS3(f2LikeURL);
             } else {
-                let f2DontURL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/re_widget_f2_dont.html";
+                let f2DontURL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/PU+Widget/pu_re_widget_f2_dont.html";
                 loadFromS3(f2DontURL);
             };
             break;
 
         case 3:
-            let f3URL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/re_widget_f3.html";
+            let f3URL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/PU+Widget/pu_re_widget_f3.html";
             loadFromS3(f3URL);
             break;
 
         case 4:
-            // NEED TO UPDATE THIS URL
-            let f4URL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/re_widget_f4.html";
+            let f4URL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/PU+Widget/pu_re_widget_f4.html";
             loadFromS3(f4URL);
             break;
 
