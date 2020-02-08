@@ -17,9 +17,7 @@ let cat7 = "0";
 let cat8 = "0";
 
 // Temporary array that will later be used to populate category
-// Set this array length to the max number of categories that could
-// be selected (8)
-let selectedCategories = Array.from(Array(8).keys())
+let selectedCategories = []
 
 // variable to track current form (default setting to 1 for F1)
 let currentForm = 1;
@@ -48,7 +46,7 @@ const loadFormEventListeners = (currentForm) => {
     let backBtn = document.querySelector('.re-widget-btn-back');
     let nextBtn = document.querySelector('.re-widget-btn-next');
     let submitBtn = document.querySelector('.re-widget-btn-submit');
-    let exitBtn = document.querySelector('.re-widget-exit-button');
+    // let exitBtn = document.querySelector('.re-widget-exit-button');
     // gets categories buttons into array
     let categoryBtns = Array.from(document.querySelectorAll('.re-widget-btn-category'));
 
@@ -62,7 +60,7 @@ const loadFormEventListeners = (currentForm) => {
             likeBtn.addEventListener("click", function() { formNavigation("like") });
             dontBtn.addEventListener("click", function() { formNavigation("dont") });
             // exit button
-            exitBtn.addEventListener("click", function() { formNavigation("exit") });
+            // exitBtn.addEventListener("click", function() { formNavigation("exit") });
             break;
 
         case 2:
@@ -105,7 +103,7 @@ const loadFormEventListeners = (currentForm) => {
             backBtn.addEventListener("click", function() { formNavigation("back") });
             nextBtn.addEventListener("click", function() { formNavigation("next") });
             // exit button
-            exitBtn.addEventListener("click", function() { formNavigation("exit") });
+            // exitBtn.addEventListener("click", function() { formNavigation("exit") });
             break;
 
         case 3:
@@ -136,12 +134,12 @@ const loadFormEventListeners = (currentForm) => {
             backBtn.addEventListener("click", function() { formNavigation("back") });
             submitBtn.addEventListener("click", function() { formNavigation("submit") });
             // exit button
-            exitBtn.addEventListener("click", function() { formNavigation("exit") });
+            // exitBtn.addEventListener("click", function() { formNavigation("exit") });
             break;
 
         case 4:
             // exit button
-            exitBtn.addEventListener("click", function() { formNavigation("exit") });
+            // exitBtn.addEventListener("click", function() { formNavigation("exit") });
             break;
 
         default:
@@ -161,7 +159,6 @@ async function loadFromS3(url) {
     await fetch(url, {}).then((response) => {
         return response.text()
     }).then((text) => {
-        console.log(text);
         reWidget.innerHTML = "";
         reWidget.innerHTML = text;
         loadFormEventListeners(currentForm);
@@ -194,7 +191,6 @@ function formNavigation(action) {
     } else if (action == "submit") {
         // logic for submit button
         // Prepare local variables for saving
-        categoryPrep();
         categoryAllocation();
         // Generate payload
         const payload = createPayload();
@@ -211,18 +207,6 @@ function formNavigation(action) {
         alert("Form Error");
     }
 };
-
-// function loops through selectedCategories length (8) 
-// and when value string is not empty then put "0". Now we have a 
-// string with either valid categories or "0"
-function categoryPrep() {
-    for (let i = 0; i < selectedCategories.length; i++) {
-        console.log("Selected Categories")
-        if (selectedCategories[i] == "") {
-            selectedCategories[i] = "0";
-        }
-    }
-}
 
 // function loops through the selectedCategories array and allocates
 // values to appropriate variables
