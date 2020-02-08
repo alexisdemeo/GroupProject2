@@ -26,6 +26,54 @@ let currentForm = 1;
 // default setting is empty and will be set during F1 sentiment selection
 let sentimentTrack = "";
 
+// metadata variables --> used most common ones (og aka 'open graph protocol')
+let meta_site;
+let meta_title;
+let meta_url;
+let meta_description;
+let meta_image; 
+
+// if the metadata property exists on the article's page, print it out
+function retrieveMetadata() {
+    console.log("Article metadata: ");
+        if(document.head.querySelector("[property~='og:site_name'][content]").content) {
+            meta_site = document.head.querySelector("[property~='og:site_name'][content]").content;
+            console.log("Site Name: " + meta_site);
+        } 
+        if(document.head.querySelector("[property~='og:title'][content]").content) {
+            meta_title = document.head.querySelector("[property~='og:title'][content]").content;
+            console.log("Article title: " + meta_title);
+
+        } 
+        if(document.head.querySelector("[property~='og:url'][content]").content) {
+            meta_url = document.head.querySelector("[property~='og:url'][content]").content;
+            console.log("Article URL: " + meta_url);
+
+        }
+        if(document.head.querySelector("[property~='og:description'][content]").content) {
+            meta_description = document.head.querySelector("[property~='og:description'][content]").content;
+            console.log("Article Description: " + meta_description);
+
+        }
+        if(document.head.querySelector("[property~='og:image'][content]").content) {
+            meta_image = document.head.querySelector("[property~='og:image'][content]").content;
+            console.log("Article image: " + meta_image);
+        }
+         
+    }
+
+// retrieveMetadata(); 
+
+// following code tested that metadata on demo test site printed
+// let test_site = document.head.querySelector("[name~=viewport][content]").content; 
+//     if (test_site) {
+//     console.log("Test site metadata: " + test_site);
+// }
+
+// Code below works
+// console.log(document.head.querySelector("[property~=og:site_name][content]").content);
+
+
 // HTML Form URLS stored in S3
 const F1_URL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/PU+Widget/pu_re_widget_f1.html";
 const F2_URL_LIKE = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/PU+Widget/pu_re_widget_f2_like.html";
@@ -283,7 +331,6 @@ const createPayload = () => {
         site: site,
         article: article,
         positive_sentiment: positive_sentiment,
-        // category: category,
         cat1: cat1,
         cat2: cat2,
         cat3: cat3,
@@ -293,7 +340,12 @@ const createPayload = () => {
         cat7: cat7,
         cat8: cat8,
         comments: comments,
-        email: email
+        email: email,
+        meta_site : meta_site,
+        meta_title : meta_title,
+        meta_url : meta_url,
+        meta_description : meta_description,
+        meta_image : meta_image    
     }
     return payload
 }
