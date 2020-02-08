@@ -26,8 +26,15 @@ let currentForm = 1;
 // default setting is empty and will be set during F1 sentiment selection
 let sentimentTrack = "";
 
-// first feedback form URL 
-const firstFormURL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/re_widget_f1.html";
+// Form URLS stored in S3
+const F1_URL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/PU+Widget/pu_re_widget_f1.html";
+const F2_URL_LIKE = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/PU+Widget/pu_re_widget_f2_like.html";
+const F2_URL_DONT = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/PU+Widget/pu_re_widget_f2_dont.html";
+const F3_URL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/PU+Widget/pu_re_widget_f3.html";
+const F4_URL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/PU+Widget/pu_re_widget_f4.html";
+
+
+
 
 // Get div with ID "re-widget-container" from client side
 let reWidget = document.querySelector("#re-widget-container");
@@ -249,28 +256,23 @@ function navigationHelper(formToLoad, sentimentTrack) {
 
     switch (formToLoad) {
         case 1:
-            let f1URL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/PU+Widget/pu_re_widget_f1.html";
-            loadFromS3(f1URL);
+            loadFromS3(F1_URL);
             break;
 
         case 2:
             if (sentimentTrack == "like") {
-                let f2LikeURL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/PU+Widget/pu_re_widget_f2_like.html";
-                loadFromS3(f2LikeURL);
+                loadFromS3(F2_URL_LIKE);
             } else {
-                let f2DontURL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/PU+Widget/pu_re_widget_f2_dont.html";
-                loadFromS3(f2DontURL);
+                loadFromS3(F2_URL_DONT);
             };
             break;
 
         case 3:
-            let f3URL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/PU+Widget/pu_re_widget_f3.html";
-            loadFromS3(f3URL);
+            loadFromS3(F3_URL);
             break;
 
         case 4:
-            let f4URL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/PU+Widget/pu_re_widget_f4.html";
-            loadFromS3(f4URL);
+            loadFromS3(F4_URL);
             break;
 
         default:
