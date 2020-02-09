@@ -1,6 +1,14 @@
 // variables to save information related to feedback
 let site = window.location.origin;
 let article = window.location.href;
+let temp = article.substring(0, article.indexOf('html'));;
+// let tempURL = "www.thespinoff.co.nz/article-name/?utm=blah&?utm=blahblahblah&?utm=blahblahblahblahblahblah";
+// let url_root = tempURL.substring(tempURL.indexOf('?') + 1);
+let url_root = article.substring(article.indexOf('u') + 1);
+console.log(site);
+console.log(article);
+console.log(temp);
+console.log(url_root);
 let positive_sentiment = "";
 // let category = "0";
 let comments = "";
@@ -31,36 +39,36 @@ let meta_site;
 let meta_title;
 let meta_url;
 let meta_description;
-let meta_image; 
+let meta_image;
 
 // if the metadata property exists on the article's page, print it out
 function retrieveMetadata() {
     console.log("Article metadata: ");
-        if(document.head.querySelector("[property~='og:site_name'][content]").content) {
-            meta_site = document.head.querySelector("[property~='og:site_name'][content]").content;
-            console.log("Site Name: " + meta_site);
-        } 
-        if(document.head.querySelector("[property~='og:title'][content]").content) {
-            meta_title = document.head.querySelector("[property~='og:title'][content]").content;
-            console.log("Article title: " + meta_title);
-
-        } 
-        if(document.head.querySelector("[property~='og:url'][content]").content) {
-            meta_url = document.head.querySelector("[property~='og:url'][content]").content;
-            console.log("Article URL: " + meta_url);
-
-        }
-        if(document.head.querySelector("[property~='og:description'][content]").content) {
-            meta_description = document.head.querySelector("[property~='og:description'][content]").content;
-            console.log("Article Description: " + meta_description);
-
-        }
-        if(document.head.querySelector("[property~='og:image'][content]").content) {
-            meta_image = document.head.querySelector("[property~='og:image'][content]").content;
-            console.log("Article image: " + meta_image);
-        }
-         
+    if (document.head.querySelector("[property~='og:site_name'][content]").content) {
+        meta_site = document.head.querySelector("[property~='og:site_name'][content]").content;
+        console.log("Site Name: " + meta_site);
     }
+    if (document.head.querySelector("[property~='og:title'][content]").content) {
+        meta_title = document.head.querySelector("[property~='og:title'][content]").content;
+        console.log("Article title: " + meta_title);
+
+    }
+    if (document.head.querySelector("[property~='og:url'][content]").content) {
+        meta_url = document.head.querySelector("[property~='og:url'][content]").content;
+        console.log("Article URL: " + meta_url);
+
+    }
+    if (document.head.querySelector("[property~='og:description'][content]").content) {
+        meta_description = document.head.querySelector("[property~='og:description'][content]").content;
+        console.log("Article Description: " + meta_description);
+
+    }
+    if (document.head.querySelector("[property~='og:image'][content]").content) {
+        meta_image = document.head.querySelector("[property~='og:image'][content]").content;
+        console.log("Article image: " + meta_image);
+    }
+
+}
 
 // retrieveMetadata(); 
 
@@ -341,11 +349,12 @@ const createPayload = () => {
         cat8: cat8,
         comments: comments,
         email: email,
-        meta_site : meta_site,
-        meta_title : meta_title,
-        meta_url : meta_url,
-        meta_description : meta_description,
-        meta_image : meta_image    
+        url_root: url_root,
+        meta_site: meta_site,
+        meta_title: meta_title,
+        meta_url: meta_url,
+        meta_description: meta_description,
+        meta_image: meta_image
     }
     return payload
 }
