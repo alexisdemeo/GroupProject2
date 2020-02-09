@@ -1,16 +1,13 @@
 // variables to save information related to feedback
 let site = window.location.origin;
-let article = window.location.href;
-let temp = article.substring(0, article.indexOf('html'));;
-// let tempURL = "www.thespinoff.co.nz/article-name/?utm=blah&?utm=blahblahblah&?utm=blahblahblahblahblahblah";
-// let url_root = tempURL.substring(tempURL.indexOf('?') + 1);
-let url_root = article.substring(article.indexOf('u') + 1);
-console.log(site);
-console.log(article);
-console.log(temp);
-console.log(url_root);
+let full_url = window.location.href;
+let article = full_url.substring(0, full_url.indexOf('?'));
+let url_parameter = full_url.substring(full_url.indexOf('?') + 1);
+// console.log(site);
+// console.log(full_url);
+// console.log(article);
+// console.log(url_parameter);
 let positive_sentiment = "";
-// let category = "0";
 let comments = "";
 let email = "";
 
@@ -41,54 +38,34 @@ let meta_url;
 let meta_description;
 let meta_image;
 
-// if the metadata property exists on the article's page, print it out
+// extracts all the article and site metadata
 function retrieveMetadata() {
-    console.log("Article metadata: ");
+    // console.log("Article metadata: ");
     if (document.head.querySelector("[property~='og:site_name'][content]").content) {
         meta_site = document.head.querySelector("[property~='og:site_name'][content]").content;
-        console.log("Site Name: " + meta_site);
+        // console.log("Site Name: " + meta_site);
     }
     if (document.head.querySelector("[property~='og:title'][content]").content) {
         meta_title = document.head.querySelector("[property~='og:title'][content]").content;
-        console.log("Article title: " + meta_title);
-
+        // console.log("Article title: " + meta_title);
     }
     if (document.head.querySelector("[property~='og:url'][content]").content) {
         meta_url = document.head.querySelector("[property~='og:url'][content]").content;
-        console.log("Article URL: " + meta_url);
-
+        // console.log("Article URL: " + meta_url);
     }
     if (document.head.querySelector("[property~='og:description'][content]").content) {
         meta_description = document.head.querySelector("[property~='og:description'][content]").content;
-        console.log("Article Description: " + meta_description);
-
+        // console.log("Article Description: " + meta_description);
     }
     if (document.head.querySelector("[property~='og:image'][content]").content) {
         meta_image = document.head.querySelector("[property~='og:image'][content]").content;
-        console.log("Article image: " + meta_image);
+        // console.log("Article image: " + meta_image);
     }
 
 }
 
-// retrieveMetadata(); 
-
-// following code tested that metadata on demo test site printed
-// let test_site = document.head.querySelector("[name~=viewport][content]").content; 
-//     if (test_site) {
-//     console.log("Test site metadata: " + test_site);
-// }
-
-// Code below works
-// console.log(document.head.querySelector("[property~=og:site_name][content]").content);
-
-// After user scrolls past 1000 pixels, pop-up will display
-document.addEventListener("scroll", function() {
-    if (window.pageYOffset > 1000)
-        document.querySelector('.re-widget-wrapper').style.display = "flex";
-});
-
-
-
+// flag for tracking the first load of form 1 to set the scroll event listener
+let firstTime = true;
 
 // HTML Form URLS stored in S3
 const F1_URL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/PU+Widget/pu_re_widget_f1.html";
@@ -118,10 +95,22 @@ const loadFormEventListeners = (currentForm) => {
     // gets categories buttons into array
     let categoryBtns = Array.from(document.querySelectorAll('.re-widget-btn-category'));
 
+    // After user scrolls past 1000 pixels, pop-up will display only on form 1 at first time load
+    if (firstTime && currentForm == 1) {
+        document.addEventListener("scroll", function() {
+            if (window.pageYOffset > 1000)
+                document.querySelector('.re-widget-wrapper').style.display = "flex";
+        });
+        firstTime = false;
+    } else {
+        document.querySelector('.re-widget-wrapper').style.display = "flex";
+    }
+
     switch (currentForm) {
         case 1:
             console.log("is firing current form 1");
             // passes sentiment for saving
+            sentimentTrack = positive_sentiment;
             likeBtn.addEventListener("click", function() { setSentiment("like") });
             dontBtn.addEventListener("click", function() { setSentiment("dont") });
             // form navigation
@@ -129,19 +118,19 @@ const loadFormEventListeners = (currentForm) => {
             dontBtn.addEventListener("click", function() { formNavigation("dont") });
             // exit button
             exitBtn.addEventListener("click", function() { formNavigation("exit") });
+            flag = false;
             break;
 
         case 2:
             // display previously saved values as active
-            // if (category != "") {
-            //     // show selected category as active
-            //     //check if the category matches any of the category buttons text and make it active
-            //     for (i = 0; i < categoryBtns.length; i++) {
-            //         if (categoryBtns[i].innerHTML == category) {
-            //             categoryBtns[i].classList.add('re-widget-active');
-            //         }
-            //     }
-            // };
+            categoryBtns.forEach(btn => {
+                selectedCategories.forEach(b => {
+                    if (btn.innerHTML == b) {
+                        console.log(b);
+                        btn.classList.add('re-widget-active');
+                    }
+                })
+            });
 
             // add event listener to all category buttons
             // toggle active class and save values to 
@@ -177,15 +166,12 @@ const loadFormEventListeners = (currentForm) => {
         case 3:
             // display previously saved values as active
             if (comments != "") {
-                // display comments
                 document.querySelector('.re-widget-input-comments').innerHTML = comments;
             }
-
             if (email != "") {
                 // display email
                 document.querySelector('.re-widget-input-email').innerHTML = email;
             }
-
             // get and save local values
             submitBtn.addEventListener("click", function() {
                 comments = document.querySelector('.re-widget-input-comments').value;
@@ -218,6 +204,9 @@ const loadFormEventListeners = (currentForm) => {
 // function sets the sentiment and saves value into local variable
 const setSentiment = (sentiment) => {
     positive_sentiment = sentiment;
+    if (sentiment != sentimentTrack) {
+        selectedCategories = [];
+    }
     sentimentTrack = sentiment;
 }
 
@@ -260,6 +249,7 @@ function formNavigation(action) {
         // logic for submit button
         // Prepare local variables for saving
         categoryAllocation();
+        retrieveMetadata();
         // Generate payload
         const payload = createPayload();
         // post data to API Gateway
@@ -344,8 +334,6 @@ function navigationHelper(formToLoad, sentimentTrack) {
 // Generate the JSON payload
 const createPayload = () => {
     payload = {
-        site: site,
-        article: article,
         positive_sentiment: positive_sentiment,
         cat1: cat1,
         cat2: cat2,
@@ -357,7 +345,9 @@ const createPayload = () => {
         cat8: cat8,
         comments: comments,
         email: email,
-        url_root: url_root,
+        site: site,
+        article: article,
+        url_parameter: url_parameter,
         meta_site: meta_site,
         meta_title: meta_title,
         meta_url: meta_url,
