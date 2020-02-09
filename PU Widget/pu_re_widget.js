@@ -84,7 +84,7 @@ function retrieveMetadata() {
 // After user scrolls past 1000 pixels, pop-up will display
 document.addEventListener("scroll", function() {
     if (window.pageYOffset > 1000)
-    document.querySelector('.re-widget-wrapper').style.display = "block";
+        document.querySelector('.re-widget-wrapper').style.display = "flex";
 });
 
 
