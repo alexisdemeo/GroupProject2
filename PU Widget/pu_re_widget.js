@@ -73,6 +73,14 @@ function retrieveMetadata() {
 // Code below works
 // console.log(document.head.querySelector("[property~=og:site_name][content]").content);
 
+// After user scrolls past 1000 pixels, pop-up will display
+document.addEventListener("scroll", function() {
+    if (window.pageYOffset > 1000)
+    document.querySelector('.re-widget-wrapper').style.display = "block";
+});
+
+
+
 
 // HTML Form URLS stored in S3
 const F1_URL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/PU+Widget/pu_re_widget_f1.html";

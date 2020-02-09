@@ -16,7 +16,9 @@
         }
         
         .re-widget-wrapper {
-            display: flex;
+            /* display: flex; */
+            /* added display none */
+            display: none;
             flex-direction: column;
             background-color: white;
             height: auto;
