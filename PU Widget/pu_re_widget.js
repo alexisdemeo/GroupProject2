@@ -1,17 +1,15 @@
-// variables to save information related to feedback
+// Variables to save information related to url and sources
 let site = window.location.origin;
 let full_url = window.location.href;
-let article = full_url.substring(0, full_url.indexOf('?'));
-let url_parameter = full_url.substring(full_url.indexOf('?') + 1);
-// console.log(site);
-// console.log(full_url);
-// console.log(article);
-// console.log(url_parameter);
-let positive_sentiment = "";
-let comments = "";
-let email = "";
+let url_parameter = '0';
+if (full_url.includes('?')) {
+    url_parameter = full_url.substring(full_url.indexOf('?') + 1);
+    console.log(url_parameter);
+}
 
-// Categories 
+let positive_sentiment = "";
+
+// Categories variables
 let cat1 = "0";
 let cat2 = "0";
 let cat3 = "0";
@@ -24,21 +22,24 @@ let cat8 = "0";
 // Temporary array that will later be used to populate category
 let selectedCategories = []
 
-// variable to track current form (default setting to 1 for F1)
+// Comments variable
+let comments = "";
+
+// Variable to track current form (default setting to 1 for F1)
 let currentForm = 1;
 
-// variable to track sentiment track (like or dont)
+// Variable to track sentiment track (like or dont)
 // default setting is empty and will be set during F1 sentiment selection
 let sentimentTrack = "";
 
-// metadata variables --> used most common ones (og aka 'open graph protocol')
+// Metadata variables --> used most common ones (og aka 'open graph protocol')
 let meta_site;
 let meta_title;
 let meta_url;
 let meta_description;
 let meta_image;
 
-// extracts all the article and site metadata
+// Extracts all the article and site metadata
 function retrieveMetadata() {
     // console.log("Article metadata: ");
     if (document.head.querySelector("[property~='og:site_name'][content]").content) {
@@ -64,7 +65,7 @@ function retrieveMetadata() {
 
 }
 
-// flag for tracking the first load of form 1 to set the scroll event listener
+// Flag for tracking the first load of form 1 to set the scroll event listener
 let firstTime = true;
 
 // HTML Form URLS stored in S3
@@ -168,19 +169,11 @@ const loadFormEventListeners = (currentForm) => {
             if (comments != "") {
                 document.querySelector('.re-widget-input-comments').innerHTML = comments;
             }
-            if (email != "") {
-                // display email
-                document.querySelector('.re-widget-input-email').innerHTML = email;
-            }
             // get and save local values
             submitBtn.addEventListener("click", function() {
                 comments = document.querySelector('.re-widget-input-comments').value;
                 if (comments == "") {
                     comments = "0"
-                }
-                email = document.querySelector('.re-widget-input-email').value;
-                if (email == "") {
-                    email = "0"
                 }
             });
 
@@ -344,9 +337,8 @@ const createPayload = () => {
         cat7: cat7,
         cat8: cat8,
         comments: comments,
-        email: email,
         site: site,
-        article: article,
+        full_url: full_url,
         url_parameter: url_parameter,
         meta_site: meta_site,
         meta_title: meta_title,
