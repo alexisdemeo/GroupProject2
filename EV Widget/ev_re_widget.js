@@ -23,7 +23,6 @@ let cat9 = "0";
 let cat10 = "0";
 let cat11 = "0";
 
-
 // Temporary array that will later be used to populate category
 let selectedCategories = []
 
@@ -100,17 +99,6 @@ const loadFormEventListeners = (currentForm) => {
     let exitBtn = document.querySelector('.re-widget-exit-button');
     // gets categories buttons into array
     let categoryBtns = Array.from(document.querySelectorAll('.re-widget-btn-category'));
-
-    // After user scrolls past 1000 pixels, pop-up will display only on form 1 at first time load
-    // if (firstTime && currentForm == 1) {
-    //     document.addEventListener("scroll", function() {
-    //         if (window.pageYOffset > 1000)
-    //             document.querySelector('.re-widget-wrapper').style.display = "flex";
-    //     });
-    //     firstTime = false;
-    // } else {
-    //     document.querySelector('.re-widget-wrapper').style.display = "flex";
-    // }
 
     switch (currentForm) {
         case 1:
