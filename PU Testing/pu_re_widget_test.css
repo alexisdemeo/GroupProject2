@@ -89,22 +89,32 @@
 
 .re-widget-btn-category {
     height: auto;
-    flex-basis: 40%;
+    /* flex-basis: 40%; */
     width: auto;
     position: relative;
-    padding: 6px;
+    padding: 1px 6px;
     margin: 5px;
-    border-style: none;
-    background-color: rgba(0, 0, 0, .2);
+    /* border-style: none; */
+    /* background-color: rgba(0, 0, 0, .2); */
     color: black;
-    border-radius: 10px;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 16px;
+    line-height: 19px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, .25);
 }
 
-.re-widget-active {
+/* .re-widget-active {
     background-color: rgba(77, 156, 224, 1);
     color: white;
+} */
+
+.re-widget-active-like {
+    background-color: rgba(73, 173, 137, 1);
+}
+
+.re-widget-active-dont {
+    background-color: rgba(245, 186, 53, 1);
 }
 
 .re-widget-btn-category:focus {
@@ -113,14 +123,23 @@
 
 .re-widget-btn-like,
 .re-widget-btn-dont {
-    border-radius: 50%;
-    width: 55px;
-    height: 55px;
-    padding: 10px;
+    /* border-radius: 50%; */
+    border-radius: 15%;
+    width: 87px;
+    height: 95px;
+    padding: 2px;
     position: relative;
     border-style: none;
     cursor: pointer;
-    background-color: rgba(0, 0, 0, .2);
+    /* background-color: rgba(0, 0, 0, .2); */
+}
+
+.re-widget-btn-like {
+    background-color: rgba(73, 173, 137, 0.2);
+}
+
+.re-widget-btn-dont {
+    background-color: rgba(245, 186, 53, 0.2);
 }
 
 .re-widget-btn-like:focus,
@@ -228,6 +247,7 @@
     color: black;
     border-radius: 10px;
     cursor: pointer;
+    /* border: 1px solid rgba(0, 0, 0, .2); */
     border: 1px solid rgba(0, 0, 0, .2);
     font-size: 12px;
 }
