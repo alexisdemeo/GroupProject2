@@ -7,9 +7,10 @@
     /* z-index: 10000; */
 }
 
-#re-widget.is-hidden {
+
+/* #re-widget.is-hidden {
     display: none;
-}
+} */
 
 .re-widget-wrapper {
     display: flex;
