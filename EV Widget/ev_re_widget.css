@@ -151,13 +151,15 @@
 }
 
 .re-widget-footer p {
+    font-size: 13px;
     margin: 0;
-    padding: 4px;
+    padding: 8px;
 }
 
 .re-widget-footer p a {
     text-decoration: none;
     color: black;
+    font-size: 13px;
 }
 
 .re-widget-footer p a:visited {
