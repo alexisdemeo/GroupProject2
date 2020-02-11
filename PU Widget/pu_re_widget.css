@@ -42,7 +42,7 @@
 .re-widget-client-icon {
     height: 29px;
     width: 29px;
-    margin: 5px 0px 2px 5px;
+    padding: 5px 0px 2px 5px;
 }
 
 .re-widget-body {
