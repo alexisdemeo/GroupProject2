@@ -6,11 +6,6 @@
     z-index: 10000;
 }
 
-
-/* #re-widget.is-hidden {
-    display: none;
-} */
-
 .re-widget-wrapper {
     display: flex;
     flex-direction: column;
@@ -50,11 +45,6 @@
     margin: 5px 0px 0px 5px;
 }
 
-
-/* p.re-widget-fb-prompt {
-    margin-top: 5px;
-} */
-
 .re-widget-body {
     display: flex;
     flex-direction: column;
@@ -75,11 +65,6 @@
     display: flex;
     justify-content: space-evenly;
     padding: 10px 0 10px 0;
-}
-
-.re-widget-btn-container-f2 {
-    /* max-width: 300px; */
-    /* margin: 0 auto; */
 }
 
 .re-widget-btn-wrapper-f2 {
@@ -105,12 +90,6 @@
     box-shadow: 2px 2px 2px rgba(0, 0, 0, .25);
 }
 
-
-/* .re-widget-active {
-    background-color: rgba(77, 156, 224, 1);
-    color: white;
-} */
-
 .re-widget-active-like {
     background-color: rgba(73, 173, 137, 1);
 }
@@ -125,7 +104,6 @@
 
 .re-widget-btn-like,
 .re-widget-btn-dont {
-    /* border-radius: 50%; */
     border-radius: 15%;
     width: 87px;
     height: 95px;
@@ -133,7 +111,6 @@
     position: relative;
     border-style: none;
     cursor: pointer;
-    /* background-color: rgba(0, 0, 0, .2); */
 }
 
 .re-widget-btn-like {
@@ -193,7 +170,6 @@
 
 .re-widget-nav-wrapper button {
     border-radius: 20px;
-    /* padding: 5px 12px 5px 12px; */
     cursor: pointer;
 }
 
@@ -250,7 +226,6 @@
     color: black;
     border-radius: 10px;
     cursor: pointer;
-    /* border: 1px solid rgba(0, 0, 0, .2); */
     border: 1px solid rgba(0, 0, 0, 1);
     font-size: 12px;
 }
@@ -306,14 +281,10 @@
     position: absolute;
     top: 6.5px;
     left: 14.5px;
-    /* margin: 8px 14px 8px 14px; */
     width: 57px;
     height: 57px;
     pointer-events: none;
 }
-
-
-/* Exit Button */
 
 .re-widget-exit-button {
     position: absolute;
@@ -339,27 +310,3 @@
     width: inherit;
     pointer-events: none;
 }
-
-
-/* Hover CSS for all buttons */
-
-
-/* 
-.re-widget-btn-like:hover,
-.re-widget-btn-dont:hover,
-.re-widget-btn-category:hover {
-    background-color: rgba(77, 156, 224, 1);
-    border: none;
-}
-
-.re-widget-btn-next:hover,
-.re-widget-btn-submit:hover,
-.re-widget-btn-back:hover {
-    background-color: rgba(77, 156, 224, 1);
-    border: none;
-}
-
-.re-link-wrapper-f4 a:hover {
-    background-color: rgba(77, 156, 224, 1);
-    border: none;
-} */
