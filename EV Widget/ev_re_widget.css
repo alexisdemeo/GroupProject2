@@ -1,17 +1,14 @@
 #re-widget {
-    position: fixed;
-    bottom: 2%;
-    right: 4%;
     font-family: 'Lato', sans-serif;
-    z-index: 10000;
+    margin: 5% 0 5% 0;
 }
 
 .re-widget-wrapper {
-    display: none;
+    display: flex;
     flex-direction: column;
     background-color: white;
     height: auto;
-    width: 350px;
+    width: auto;
     border: none;
     border-radius: 20px;
 }
@@ -24,7 +21,7 @@
     border-left: 5px solid black;
     border-right: 5px solid black;
     position: relative;
-    height: 36px;
+    height: 50px;
 }
 
 .re-widget-title {
@@ -40,8 +37,8 @@
 }
 
 .re-widget-client-icon {
-    height: 29px;
-    width: 29px;
+    height: 45px;
+    width: 45px;
     padding: 5px 0px 2px 5px;
 }
 
@@ -67,6 +64,14 @@
     padding: 10px 0 10px 0;
 }
 
+
+/* added - need to test */
+
+.re-widget-btn-container-f2 {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
 .re-widget-btn-wrapper-f2 {
     display: flex;
     flex-flow: row wrap;
@@ -75,12 +80,10 @@
 
 .re-widget-btn-category {
     height: auto;
-    /* flex-basis: 40%; */
     width: auto;
     position: relative;
     padding: 1px 6px;
     margin: 5px;
-    /* border-style: none; */
     background-color: white;
     color: black;
     border-radius: 6px;
@@ -148,13 +151,15 @@
 }
 
 .re-widget-footer p {
+    font-size: 13px;
     margin: 0;
-    padding: 4px;
+    padding: 8px;
 }
 
 .re-widget-footer p a {
     text-decoration: none;
     color: black;
+    font-size: 13px;
 }
 
 .re-widget-footer p a:visited {
@@ -219,7 +224,7 @@
 .re-widget-input-comments {
     height: auto;
     flex-basis: 100%;
-    width: 299px;
+    width: 500px;
     position: relative;
     padding: 8px;
     margin: 5px;
@@ -228,7 +233,7 @@
     border-radius: 10px;
     cursor: pointer;
     border: 1px solid rgba(0, 0, 0, 1);
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .re-widget-input-comments {
@@ -241,50 +246,27 @@
 }
 
 .re-widget-link-container-f4 {
-    margin: 0 auto;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px 0 10px 0;
 }
 
-.re-link-wrapper-f4 {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.re-link-wrapper-f4 div {
-    display: flex;
-    flex-direction: column;
-    flex: 1 0 21%;
+.re-widget-link-container-f4 a {
+    text-decoration: none;
     text-align: center;
-    margin: 10px;
-}
-
-.re-link-wrapper-f4 div a {
-    position: relative;
-    cursor: pointer;
-    text-decoration: none;
-    border-radius: 10px;
+    min-width: 180px;
+    height: 53px;
+    padding: 15px 6px;
+    margin: 8px;
     background-color: rgba(77, 156, 224, 0.5);
-    width: 86px;
-    height: 70px;
-}
-
-.re-link-wrapper-f4 div a:visited {
-    color: inherit;
-    text-decoration: none;
-}
-
-.re-link-wrapper-f4 div p {
-    font-size: 12px;
-    margin-top: 2px;
     color: black;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
 }
 
-.re-link-wrapper-f4 a img {
-    position: absolute;
-    top: 6.5px;
-    left: 14.5px;
-    width: 57px;
-    height: 57px;
-    pointer-events: none;
+.re-link-wrapper-f4 a:visited {
+    color: inherit;
 }
 
 .re-widget-exit-button {
