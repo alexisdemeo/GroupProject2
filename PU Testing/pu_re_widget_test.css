@@ -113,7 +113,7 @@
 
 .re-widget-btn-like,
 .re-widget-btn-dont {
-    border-radius: 50%;
+    border-radius: 15%;
     width: 55px;
     height: 55px;
     padding: 10px;
