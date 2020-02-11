@@ -7,6 +7,7 @@ if (full_url.includes('?')) {
     console.log(url_parameter);
 }
 
+// variable to store reader sentiment
 let positive_sentiment = "";
 
 // Categories variables
@@ -18,6 +19,10 @@ let cat5 = "0";
 let cat6 = "0";
 let cat7 = "0";
 let cat8 = "0";
+let cat9 = "0";
+let cat10 = "0";
+let cat11 = "0";
+
 
 // Temporary array that will later be used to populate category
 let selectedCategories = []
@@ -306,6 +311,16 @@ function categoryAllocation() {
             case 7:
                 cat8 = selectedCategories[i];
                 break;
+            case 8:
+                cat9 = selectedCategories[i];
+                break;
+            case 9:
+                cat10 = selectedCategories[i];
+                break;
+            case 10:
+                cat11 = selectedCategories[i];
+                break;
+
         }
     }
 }
@@ -353,6 +368,9 @@ const createPayload = () => {
         cat6: cat6,
         cat7: cat7,
         cat8: cat8,
+        cat9: cat9,
+        cat10: cat10,
+        cat11: cat11,
         comments: comments,
         site: site,
         full_url: full_url,
