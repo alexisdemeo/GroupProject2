@@ -169,7 +169,7 @@
 .re-widget-nav-wrapper {
     display: flex;
     justify-content: space-between;
-    padding: 10px 80px 10px 80px;
+    padding: 10px 220px 10px 220px;
     border-left: 5px solid black;
     border-right: 5px solid black;
 }
