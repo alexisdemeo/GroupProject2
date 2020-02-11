@@ -1,17 +1,16 @@
-// variables to save information related to feedback
+// Variables to save information related to url and sources
 let site = window.location.origin;
 let full_url = window.location.href;
-let article = full_url.substring(0, full_url.indexOf('?'));
-let url_parameter = full_url.substring(full_url.indexOf('?') + 1);
-// console.log(site);
-// console.log(full_url);
-// console.log(article);
-// console.log(url_parameter);
-let positive_sentiment = "";
-let comments = "";
-let email = "";
+let url_parameter = '0';
+if (full_url.includes('?')) {
+    url_parameter = full_url.substring(full_url.indexOf('?') + 1);
+    console.log(url_parameter);
+}
 
-// Categories 
+// variable to store reader sentiment
+let positive_sentiment = "";
+
+// Categories variables
 let cat1 = "0";
 let cat2 = "0";
 let cat3 = "0";
@@ -20,25 +19,32 @@ let cat5 = "0";
 let cat6 = "0";
 let cat7 = "0";
 let cat8 = "0";
+let cat9 = "0";
+let cat10 = "0";
+let cat11 = "0";
+
 
 // Temporary array that will later be used to populate category
 let selectedCategories = []
 
-// variable to track current form (default setting to 1 for F1)
+// Comments variable
+let comments = "";
+
+// Variable to track current form (default setting to 1 for F1)
 let currentForm = 1;
 
-// variable to track sentiment track (like or dont)
+// Variable to track sentiment track (like or dont)
 // default setting is empty and will be set during F1 sentiment selection
 let sentimentTrack = "";
 
-// metadata variables --> used most common ones (og aka 'open graph protocol')
+// Metadata variables --> used most common ones (og aka 'open graph protocol')
 let meta_site;
 let meta_title;
 let meta_url;
 let meta_description;
 let meta_image;
 
-// extracts all the article and site metadata
+// Extracts all the article and site metadata
 function retrieveMetadata() {
     // console.log("Article metadata: ");
     if (document.head.querySelector("[property~='og:site_name'][content]").content) {
@@ -64,15 +70,15 @@ function retrieveMetadata() {
 
 }
 
-// flag for tracking the first load of form 1 to set the scroll event listener
+// Flag for tracking the first load of form 1 to set the scroll event listener
 let firstTime = true;
 
 // HTML Form URLS stored in S3
-const F1_URL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/PU+Widget/pu_re_widget_f1.html";
-const F2_URL_LIKE = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/PU+Widget/pu_re_widget_f2_like.html";
-const F2_URL_DONT = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/PU+Widget/pu_re_widget_f2_dont.html";
-const F3_URL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/PU+Widget/pu_re_widget_f3.html";
-const F4_URL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/PU+Widget/pu_re_widget_f4.html";
+const F1_URL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/HTML/re_widget_f1.html";
+const F2_URL_LIKE = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/HTML/re_widget_f2_like.html";
+const F2_URL_DONT = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/HTML/re_widget_f2_dont.html";
+const F3_URL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/HTML/re_widget_f3.html";
+const F4_URL = "https://sample-form-bucket.s3-ap-southeast-2.amazonaws.com/HTML/pu_re_widget_f4.html";
 
 // Get div with ID "re-widget-container" from client side
 let reWidget = document.querySelector("#re-widget-container");
@@ -96,15 +102,15 @@ const loadFormEventListeners = (currentForm) => {
     let categoryBtns = Array.from(document.querySelectorAll('.re-widget-btn-category'));
 
     // After user scrolls past 1000 pixels, pop-up will display only on form 1 at first time load
-    if (firstTime && currentForm == 1) {
-        document.addEventListener("scroll", function() {
-            if (window.pageYOffset > 1000)
-                document.querySelector('.re-widget-wrapper').style.display = "flex";
-        });
-        firstTime = false;
-    } else {
-        document.querySelector('.re-widget-wrapper').style.display = "flex";
-    }
+    // if (firstTime && currentForm == 1) {
+    //     document.addEventListener("scroll", function() {
+    //         if (window.pageYOffset > 1000)
+    //             document.querySelector('.re-widget-wrapper').style.display = "flex";
+    //     });
+    //     firstTime = false;
+    // } else {
+    //     document.querySelector('.re-widget-wrapper').style.display = "flex";
+    // }
 
     switch (currentForm) {
         case 1:
@@ -127,7 +133,11 @@ const loadFormEventListeners = (currentForm) => {
                 selectedCategories.forEach(b => {
                     if (btn.innerHTML == b) {
                         console.log(b);
-                        btn.classList.add('re-widget-active');
+                        if (sentimentTrack == "like") {
+                            btn.classList.add('re-widget-active-like');
+                        } else {
+                            btn.classList.add('re-widget-active-dont');
+                        }
                     }
                 })
             });
@@ -136,23 +146,36 @@ const loadFormEventListeners = (currentForm) => {
             // toggle active class and save values to 
             // selecteCategories array for later use
             categoryBtns.forEach(btn => {
-
                 btn.addEventListener("click", function(event) {
                     toggleSelected(event)
                 })
 
                 const toggleSelected = (event) => {
-                    if (event.target.classList.contains('re-widget-active')) {
-                        event.target.classList.remove('re-widget-active');
-                        const index = selectedCategories.indexOf(event.target.innerHTML);
-                        if (index > -1) {
-                            selectedCategories.splice(index, 1);
+                    if (sentimentTrack == "like") {
+                        if (event.target.classList.contains('re-widget-active-like')) {
+                            event.target.classList.remove('re-widget-active-like');
+                            const index = selectedCategories.indexOf(event.target.innerHTML);
+                            if (index > -1) {
+                                selectedCategories.splice(index, 1);
+                            }
+                        } else {
+                            event.target.classList.add('re-widget-active-like');
+                            selectedCategories.push(event.target.innerHTML)
                         }
+                        console.log(selectedCategories)
                     } else {
-                        event.target.classList.add('re-widget-active');
-                        selectedCategories.push(event.target.innerHTML)
+                        if (event.target.classList.contains('re-widget-active-dont')) {
+                            event.target.classList.remove('re-widget-active-dont');
+                            const index = selectedCategories.indexOf(event.target.innerHTML);
+                            if (index > -1) {
+                                selectedCategories.splice(index, 1);
+                            }
+                        } else {
+                            event.target.classList.add('re-widget-active-dont');
+                            selectedCategories.push(event.target.innerHTML)
+                        }
+                        console.log(selectedCategories)
                     }
-                    console.log(selectedCategories)
                 }
             });
 
@@ -168,19 +191,11 @@ const loadFormEventListeners = (currentForm) => {
             if (comments != "") {
                 document.querySelector('.re-widget-input-comments').innerHTML = comments;
             }
-            if (email != "") {
-                // display email
-                document.querySelector('.re-widget-input-email').innerHTML = email;
-            }
             // get and save local values
             submitBtn.addEventListener("click", function() {
                 comments = document.querySelector('.re-widget-input-comments').value;
                 if (comments == "") {
                     comments = "0"
-                }
-                email = document.querySelector('.re-widget-input-email').value;
-                if (email == "") {
-                    email = "0"
                 }
             });
 
@@ -296,6 +311,16 @@ function categoryAllocation() {
             case 7:
                 cat8 = selectedCategories[i];
                 break;
+            case 8:
+                cat9 = selectedCategories[i];
+                break;
+            case 9:
+                cat10 = selectedCategories[i];
+                break;
+            case 10:
+                cat11 = selectedCategories[i];
+                break;
+
         }
     }
 }
@@ -343,10 +368,12 @@ const createPayload = () => {
         cat6: cat6,
         cat7: cat7,
         cat8: cat8,
+        cat9: cat9,
+        cat10: cat10,
+        cat11: cat11,
         comments: comments,
-        email: email,
         site: site,
-        article: article,
+        full_url: full_url,
         url_parameter: url_parameter,
         meta_site: meta_site,
         meta_title: meta_title,
