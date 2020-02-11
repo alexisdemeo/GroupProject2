@@ -128,7 +128,11 @@ const loadFormEventListeners = (currentForm) => {
                 selectedCategories.forEach(b => {
                     if (btn.innerHTML == b) {
                         console.log(b);
-                        btn.classList.add('re-widget-active');
+                        if (sentimentTrack == "like") {
+                            btn.classList.add('re-widget-active-like');
+                        } else {
+                            btn.classList.add('re-widget-active-dont');
+                        }
                     }
                 })
             });
@@ -137,23 +141,36 @@ const loadFormEventListeners = (currentForm) => {
             // toggle active class and save values to 
             // selecteCategories array for later use
             categoryBtns.forEach(btn => {
-
                 btn.addEventListener("click", function(event) {
                     toggleSelected(event)
                 })
 
                 const toggleSelected = (event) => {
-                    if (event.target.classList.contains('re-widget-active')) {
-                        event.target.classList.remove('re-widget-active');
-                        const index = selectedCategories.indexOf(event.target.innerHTML);
-                        if (index > -1) {
-                            selectedCategories.splice(index, 1);
+                    if (sentimentTrack == "like") {
+                        if (event.target.classList.contains('re-widget-active-like')) {
+                            event.target.classList.remove('re-widget-active-like');
+                            const index = selectedCategories.indexOf(event.target.innerHTML);
+                            if (index > -1) {
+                                selectedCategories.splice(index, 1);
+                            }
+                        } else {
+                            event.target.classList.add('re-widget-active-like');
+                            selectedCategories.push(event.target.innerHTML)
                         }
+                        console.log(selectedCategories)
                     } else {
-                        event.target.classList.add('re-widget-active');
-                        selectedCategories.push(event.target.innerHTML)
+                        if (event.target.classList.contains('re-widget-active-dont')) {
+                            event.target.classList.remove('re-widget-active-dont');
+                            const index = selectedCategories.indexOf(event.target.innerHTML);
+                            if (index > -1) {
+                                selectedCategories.splice(index, 1);
+                            }
+                        } else {
+                            event.target.classList.add('re-widget-active-dont');
+                            selectedCategories.push(event.target.innerHTML)
+                        }
+                        console.log(selectedCategories)
                     }
-                    console.log(selectedCategories)
                 }
             });
 
