@@ -4,7 +4,6 @@ let full_url = window.location.href;
 let url_parameter = '0';
 if (full_url.includes('?')) {
     url_parameter = full_url.substring(full_url.indexOf('?') + 1);
-    console.log(url_parameter);
 }
 
 // variable to store reader sentiment
@@ -46,26 +45,20 @@ let meta_image;
 
 // Extracts all the article and site metadata
 function retrieveMetadata() {
-    // console.log("Article metadata: ");
     if (document.head.querySelector("[property~='og:site_name'][content]").content) {
         meta_site = document.head.querySelector("[property~='og:site_name'][content]").content;
-        // console.log("Site Name: " + meta_site);
     }
     if (document.head.querySelector("[property~='og:title'][content]").content) {
         meta_title = document.head.querySelector("[property~='og:title'][content]").content;
-        // console.log("Article title: " + meta_title);
     }
     if (document.head.querySelector("[property~='og:url'][content]").content) {
         meta_url = document.head.querySelector("[property~='og:url'][content]").content;
-        // console.log("Article URL: " + meta_url);
     }
     if (document.head.querySelector("[property~='og:description'][content]").content) {
         meta_description = document.head.querySelector("[property~='og:description'][content]").content;
-        // console.log("Article Description: " + meta_description);
     }
     if (document.head.querySelector("[property~='og:image'][content]").content) {
         meta_image = document.head.querySelector("[property~='og:image'][content]").content;
-        // console.log("Article image: " + meta_image);
     }
 
 }
@@ -90,7 +83,6 @@ window.onload = function() {
 
 // function takes current form value and selects the appropriate form elements and adds listeners
 const loadFormEventListeners = (currentForm) => {
-    console.log("loadFormEventListeners");
     // declare all the buttons for switch cases
     let likeBtn = document.querySelector('.re-widget-btn-like');
     let dontBtn = document.querySelector('.re-widget-btn-dont');
@@ -114,7 +106,6 @@ const loadFormEventListeners = (currentForm) => {
 
     switch (currentForm) {
         case 1:
-            console.log("is firing current form 1");
             // passes sentiment for saving
             sentimentTrack = positive_sentiment;
             likeBtn.addEventListener("click", function() { setSentiment("like") });
@@ -132,7 +123,6 @@ const loadFormEventListeners = (currentForm) => {
             categoryBtns.forEach(btn => {
                 selectedCategories.forEach(b => {
                     if (btn.innerHTML == b) {
-                        console.log(b);
                         if (sentimentTrack == "like") {
                             btn.classList.add('re-widget-active-like');
                         } else {
@@ -162,7 +152,6 @@ const loadFormEventListeners = (currentForm) => {
                             event.target.classList.add('re-widget-active-like');
                             selectedCategories.push(event.target.innerHTML)
                         }
-                        console.log(selectedCategories)
                     } else {
                         if (event.target.classList.contains('re-widget-active-dont')) {
                             event.target.classList.remove('re-widget-active-dont');
@@ -174,7 +163,6 @@ const loadFormEventListeners = (currentForm) => {
                             event.target.classList.add('re-widget-active-dont');
                             selectedCategories.push(event.target.innerHTML)
                         }
-                        console.log(selectedCategories)
                     }
                 }
             });
@@ -185,7 +173,6 @@ const loadFormEventListeners = (currentForm) => {
             // exit button
             exitBtn.addEventListener("click", function() { formNavigation("exit") });
             break;
-
         case 3:
             // display previously saved values as active
             if (comments != "") {
@@ -227,7 +214,6 @@ const setSentiment = (sentiment) => {
 
 // helper function that takes url and loads html from S3
 async function loadFromS3(url) {
-    console.log("loadFromS3");
     await fetch(url, {}).then((response) => {
         return response.text()
     }).then((text) => {
@@ -241,10 +227,7 @@ async function loadFromS3(url) {
 // function that handles the navigation logic for the back, next 
 // and submit buttons and then passes it on to the navigation helper function
 function formNavigation(action) {
-    console.log("formNavigation");
-
     if (action == "like" || action == "dont") {
-        console.log("like or dont");
         let nextForm = currentForm + 1;
         navigationHelper(nextForm, sentimentTrack);
         currentForm = nextForm;
@@ -286,7 +269,6 @@ function formNavigation(action) {
 // values to appropriate variables
 function categoryAllocation() {
     for (let i = 0; i < selectedCategories.length; i++) {
-        console.log("Selected Categories")
         switch (i) {
             case 0:
                 cat1 = selectedCategories[i];
@@ -329,8 +311,6 @@ function categoryAllocation() {
 // function takes the required form value and passes it 
 // on to S3 load helper function with the appropriate URL
 function navigationHelper(formToLoad, sentimentTrack) {
-    console.log("navigationHelper");
-
     switch (formToLoad) {
         case 1:
             loadFromS3(F1_URL);
