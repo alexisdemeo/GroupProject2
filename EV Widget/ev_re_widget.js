@@ -1,9 +1,9 @@
 // Variables to save information related to url and sources
 let site = window.location.origin;
 let full_url = window.location.href;
-let url_parameter = '0';
+let utm_parameter = '0';
 if (full_url.includes('?')) {
-    url_parameter = full_url.substring(full_url.indexOf('?') + 1);
+    utm_parameter = full_url.substring(full_url.indexOf('?') + 1);
 }
 
 // variable to store reader sentiment
@@ -345,7 +345,7 @@ const createPayload = () => {
         comments: comments,
         site: site,
         full_url: full_url,
-        url_parameter: url_parameter,
+        utm_parameter: utm_parameter,
         client_site: meta_site,
         article_title: meta_title,
         article_url: meta_url,
