@@ -231,6 +231,7 @@ async function loadFromS3(url) {
     await fetch(url, {}).then((response) => {
         return response.text()
     }).then((text) => {
+        
         reWidget.innerHTML = "";
         reWidget.innerHTML = text;
         loadFormEventListeners(currentForm);
