@@ -186,6 +186,7 @@
     width: 70px;
     border: none;
     position: relative;
+    background-color: white;
 }
 
 .re-widget-btn-next img,
