@@ -356,11 +356,11 @@ const createPayload = () => {
         site: site,
         full_url: full_url,
         url_parameter: url_parameter,
-        meta_site: meta_site,
-        meta_title: meta_title,
-        meta_url: meta_url,
-        meta_description: meta_description,
-        meta_image: meta_image
+        _site: meta_site,
+        article_title: meta_title,
+        article_url: meta_url,
+        article_description: meta_description,
+        article_image: meta_image
     }
     return payload
 }
