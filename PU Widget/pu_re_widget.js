@@ -356,7 +356,7 @@ const createPayload = () => {
         site: site,
         full_url: full_url,
         url_parameter: url_parameter,
-        _site: meta_site,
+        client_site: meta_site,
         article_title: meta_title,
         article_url: meta_url,
         article_description: meta_description,
